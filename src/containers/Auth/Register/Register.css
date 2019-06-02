@@ -1,3 +1,6 @@
+.reg-back{
+    background-image: url(../Assets/body-back-reg.jpg)
+}
 #register{
     display: flex;
     flex-direction: column;
@@ -19,7 +22,7 @@
         height: auto;
         text-align: center;
 
-        background-color: rgba(255, 255, 255, 0.377);
+        background-color: rgba(255, 255, 255, 0.774);
         border-radius: 20px
     }
 
@@ -37,6 +40,9 @@
 
         .field{
             align-self: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             margin-bottom: 15px;
             width:100%;
         }
@@ -51,7 +57,7 @@
                 outline:none;
                 border:none;
                 height:25px;
-                width:70%;
+                width:65%;
 
                 box-sizing: content-box;
                 padding:7px;
@@ -62,7 +68,7 @@
                 font-weight: lighter;
                 color: rgba(2, 80, 80, 0.945);
                 
-                border-radius: 5px;
+                border-radius: 10px;
                
                 background-color:transparent;
                 

@@ -10,6 +10,7 @@ class register extends Component {
         }
     }
     render(){
+        document.body.className = "reg-back"
         return(
             <div id="register">
                 <Logo/>
@@ -17,7 +18,7 @@ class register extends Component {
                     <div className="form-header">Register Yourself</div>
                     <div className="field">
                         <div className="name">Username</div>
-                        <input name="useranme" type="text" />
+                        <input name="username" type="text" />
                     </div>
                     <div className="field">
                         <div className="name">Email</div>
