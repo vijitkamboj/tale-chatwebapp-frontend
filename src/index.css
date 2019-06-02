@@ -3,12 +3,13 @@ body,html{
   padding:0px;
   height: 100%;
   width: 100%;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+  font-family:'Times New Roman', Times, serif;
 }
 
 body{
   background-image: url(./body-back.jpg);
   background-size: cover;
+  background-position: center;
 }
 
 #root{
