@@ -32,7 +32,7 @@ class register extends Component {
                         <div className="name">Confirm Password</div>
                         <input name="passwordConfirmation" type="password" />
                     </div>
-                    <div class="btn" >Register</div>
+                    <div className="btn" >Register</div>
                 </div>
             </div>
         )
