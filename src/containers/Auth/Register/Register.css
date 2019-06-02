@@ -2,59 +2,70 @@
     display: flex;
     flex-direction: column;
     align-items:center;
+
     width: 100%;
     height: auto;
 }
 
     .form-cont{
+        display: flex;
+        flex-direction: column;
+
         position: absolute;
         top:70px;
         right: 50px;
-        display: flex;
-        flex-direction: column;
+        
         width: 360px;
         height: auto;
         text-align: center;
+
         background-color: rgba(255, 255, 255, 0.377);
-        color: rgb(121, 120, 120);
         border-radius: 20px
     }
 
         .form-header{
             align-self: center;
             width: fit-content;
+
             padding: 8px;
-            font-size: 40px;
             margin-bottom: 15px;
+
+            font-size: 40px;
+            color: rgb(121, 120, 120);
             border-bottom: 2px solid rgb(255, 139, 139);
         }
 
         .field{
             align-self: center;
-            width:100%;
             margin-bottom: 15px;
+            width:100%;
         }
 
             .name{
-                font-size: 25px;
                 margin:10px;
-                
+                font-size: 25px;
                 font-weight: lighter;
+                color: rgb(121, 120, 120);
             }
             input{
                 outline:none;
                 border:none;
-                width:70%;
-                font-size:20px;
-                font-weight: bold;
                 height:25px;
-                border-radius: 5px;
+                width:70%;
+
                 box-sizing: content-box;
                 padding:7px;
                 padding-left: 20px;
                 padding-right : 20px;
-                background-color:transparent;
+
+                font-size:20px;
+                font-weight: lighter;
                 color: rgba(2, 80, 80, 0.945);
+                
+                border-radius: 5px;
+               
+                background-color:transparent;
+                
                 -webkit-box-shadow: 0px 0px 20px -10px rgba(0, 0, 0, 0.75);
                 -moz-box-shadow: 0px 0px 20px -10px rgba(0, 0, 0, 0.75);
                 box-shadow: 0px 0px 20px -10px rgba(0, 0, 0, 0.75);
