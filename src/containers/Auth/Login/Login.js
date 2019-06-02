@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Logo from '../logo'
+import Logo from '../logo';
+import {Link} from 'react-router-dom'
 
 class login extends Component {
     render(){
@@ -18,6 +19,7 @@ class login extends Component {
                         <input name="password" type="password" />
                     </div>
                     <div className="btn" >Login</div>
+                    <p id="prompt">Haven't Registered? <Link to="/register"> REGISTER</Link></p>
                 </div>
             </div>
         )

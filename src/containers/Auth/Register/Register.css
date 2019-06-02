@@ -94,3 +94,7 @@
         .btn:hover{
             cursor: pointer;
         }
+
+        p#prompt{
+            color:rgb(121, 120, 120)
+        }

@@ -1,6 +1,7 @@
 import React,{ Component } from 'react';
 import './Register.css'
 import Logo from '../logo'
+import {Link} from 'react-router-dom'
 
 class register extends Component {
     constructor(){
@@ -33,6 +34,7 @@ class register extends Component {
                         <input name="passwordConfirmation" type="password" />
                     </div>
                     <div className="btn" >Register</div>
+                    <p id="prompt">Already a user? <Link to="/login">LOGIN</Link> </p>
                 </div>
             </div>
         )
