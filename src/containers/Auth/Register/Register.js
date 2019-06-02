@@ -1,5 +1,6 @@
-import { Component } from 'react';
+import React,{ Component } from 'react';
 import './Register.css'
+import Logo from '../logo'
 
 class register extends Component {
     constructor(){
@@ -10,8 +11,14 @@ class register extends Component {
     }
     render(){
         return(
-            null
-            )
+            <div id="register">
+                <Logo/>
+                <div className="form-cont">
+                    <div className="form-header">REGISTER</div>
+
+                </div>
+            </div>
+        )
     }
 }
 
