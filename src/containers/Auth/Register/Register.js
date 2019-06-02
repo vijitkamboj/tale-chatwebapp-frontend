@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
+import './Register.css'
 
 class register extends Component {
     constructor(){
@@ -9,8 +10,8 @@ class register extends Component {
     }
     render(){
         return(
-            <h1>REGISTER</h1>
-        )
+            null
+            )
     }
 }
 

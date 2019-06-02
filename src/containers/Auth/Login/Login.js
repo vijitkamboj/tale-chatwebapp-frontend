@@ -9,7 +9,7 @@ class login extends Component {
     }
     render(){
         return(
-            <h1>LOGIN</h1>
+            <div id="form"></div>
         )
     }
 }
