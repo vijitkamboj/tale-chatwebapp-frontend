@@ -14,7 +14,7 @@ class register extends Component {
             <div id="register">
                 <Logo/>
                 <div className="form-cont">
-                    <div className="form-header">REGISTER</div>
+                    <div className="form-header">Register Yourself</div>
 
                 </div>
             </div>

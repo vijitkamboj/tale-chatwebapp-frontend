@@ -5,7 +5,7 @@ const Logo = () => <img
                     src={logo} 
                     alt="logo" 
                     id="logo" 
-                    height="130px" 
+                    height="150px" 
                     width="auto" 
                     style={{padding : "8px" , alignSelf : "flex-start"}}
                         
