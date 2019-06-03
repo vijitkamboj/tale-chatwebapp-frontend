@@ -2,108 +2,126 @@ import React,{ Component } from 'react';
 import {Link} from 'react-router-dom'
 import firebase from '../../../firebase'
 import './Register.css';
-import { Button } from 'semantic-ui-react'
+import { Button,Message } from 'semantic-ui-react'
 
 import Logo from '../logo';
-import Nav from '../../../components/Nav/Nav'
+
 
 
 class register extends Component {
-    constructor(){
-        super()
-        this.state = {
-            username:'',
-            email: '',
-            password:'',
-            passwordConfirmation:'',
-            errors: []
-        }
-    }
+	constructor(){
+		super()
+		this.state = {
+			username:'',
+			email: '',
+			password:'',
+			passwordConfirmation:'',
+			errors: [],
+			loading:false,
+			status:'Register'
+		}
+	}
 
-    handleChange = (event) => {
-        this.setState({[event.target.name]:event.target.value})
-    }
+	handleChange = (event) => {
+		this.setState({[event.target.name]:event.target.value,errors: [],status:'Register'})
+	}
 
-    handleSubmit = (event) => {
-        if(this.isFormValid()){
-            event.preventDefault();
-            firebase.auth()
-            .createUserWithEmailAndPassword(this.state.email,this.state.password)
-            .then( createdUser => console.log(createdUser))
-            .catch(err => console.error(err))
-        }
-    }
+	handleSubmit = (event) => {
+		event.preventDefault();
+		if(this.isFormValid()){
+			this.setState({loading:true,errors:[]})
+			firebase.auth()
+			.createUserWithEmailAndPassword(this.state.email,this.state.password)
+			.then( createdUser => {
+				console.log(createdUser)
+				this.setState({loading:false,status:'Registered'})
+			})
+			.catch(err => {
+				this.setState({errors:this.state.errors.concat(err),loading:false})
+			})
+		}
+	}
 
-    isFormValid = () => {
-        let errors = []
-        let error
-        if (this.isFormEmpty(this.state)) {
-            error = { message: "Fill in all fields"}
-            this.setState({errors : errors.concat(error)})
-            return false;
-        } else if(!this.isPasswordValid(this.state)){
-            error = { message: "Password ain't valid"}
-            this.setState({errors : errors.concat(error)})
-            return false
-        }else{
-        return true
-        }
-    }
+	isFormValid = () => {
+		let errors = []
+		let error
+		if (this.isFormEmpty(this.state)) {
+			error = { message: "Fill in all fields"}
+			this.setState({errors : errors.concat(error)})
+			return false;
+		} else if(!this.isPasswordValid(this.state)){
+			error = { message: "Password ain't valid"}
+			this.setState({errors : errors.concat(error)})
+			return false
+		}else{
+		return true
+		}
+	}
 
-    isFormEmpty = ({username,email,password,passwordConfirmation}) =>{
-        return(
-        !username.length || !email.length || !password.length || !passwordConfirmation.length
-        )}
+	isFormEmpty = ({username,email,password,passwordConfirmation}) =>{
+		return(
+		!username.length || !email.length || !password.length || !passwordConfirmation.length
+		)}
 
-    isPasswordValid = ({password , passwordConfirmation}) => {
-        if ( password.length<6 || passwordConfirmation.length<6){
-            return false;
-        }else if (password !== passwordConfirmation){
-            return false;
-        }else{
-            return true;
-        }
-    }
+	isPasswordValid = ({password , passwordConfirmation}) => {
+		if (password !== passwordConfirmation){
+			return false;
+		}else{
+			return true;
+		}
+	}
 
-    render(){
-        document.body.className = 'reg-back';
+	displayError =(errors) => errors.map((error,i) => <p key ={i}>{error.message}</p> );
 
-        return(
-            <div id="register">
-                <Nav />
-                <Logo/>
-                <div className="form-cont">
+	handleEnter = (event) =>{
+		if (event.keyCode === 13){
+			(this.handleSubmit(event))
+		}
+	}
+	
 
-                    <div className="form-header">Register Yourself</div>
-                    <div className="field">
-                        <div className="name">Username</div>
-                        <input className="form" name="username" type="text" onChange={this.handleChange}/>
-                    </div>
+	render(){
+		document.body.className = 'reg-back';
 
-                    <div className="field">
-                        <div className="name">Email</div>
-                        <input className="form" name="email" type="email" onChange ={this.handleChange} />
-                    </div>
+		return(
+			<div id="register">
+				<Logo/>
+				<div className="form-cont"  onKeyDown={this.handleEnter}>
 
-                    <div className="field">
-                        <div className="name">Password</div>
-                        <input className="form" name="password" type="password" onChange={this.handleChange}/>
-                    </div>
+					<div className="form-header">Register Yourself</div>
+					<div className="field">
+						<div className="name">Username</div>
+						<input className="form" name="username" type="text" onChange={this.handleChange}/>
+					</div>
 
-                    <div className="field">
-                        <div className="name">Confirm Password</div>
-                        <input className="form" name="passwordConfirmation" type="password" onChange={this.handleChange}/>
-                    </div>
-                    <Button id="btn-register" onClick={this.handleSubmit} >Register</Button>
+					<div className="field">
+						<div className="name">Email</div>
+						<input className="form" name="email" type="email" onChange ={this.handleChange} />
+					</div>
 
-                    <p id="prompt">Already a user? <Link to="/login" className="authLink" id="login"> LOGIN
-                    </Link> 
-                    </p>
+					<div className="field">
+						<div className="name">Password</div>
+						<input className="form" name="password" type="password" onChange={this.handleChange}/>
+					</div>
 
-                </div>
-            </div>
-        )
-    }
+					<div className="field">
+						<div className="name">Confirm Password</div>
+						<input className="form" name="passwordConfirmation" type="password" onChange={this.handleChange}/>
+					</div>
+					<Button id="btn-register" onClick={this.handleSubmit} className={this.state.loading ? 'loading' : ''} disabled={this.state.loading}> {this.state.status}</Button>
+					{
+						this.state.errors.length>0 && (
+							<Message error className="error-prompt" id="register">{this.displayError(this.state.errors)}</Message>
+						)
+					}
+					<p id="prompt">Already a user? <Link to="/login" className="authLink" id="login"> LOGIN
+					</Link> 
+					</p>
+
+				</div>
+			</div>
+		)
+	}
 }
 
 
