@@ -19,9 +19,14 @@ class register extends Component {
     }
     handleSubmit = (event) => {
         event.preventDefault();
+        firebase.auth()
+        .createUserWithEmailAndPassword(this.state.email,this.state.password)
+        .then( createdUser => console.log(createdUser))
+        .catch(err => console.log(err))
 
     }
     render(){
+        document.body.className = 'reg-back'
         return(
             <div id="register">
                 <Logo/>
