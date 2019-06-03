@@ -7,13 +7,11 @@ import Register from './containers/Auth/Register/Register'
 import * as serviceWorker from './serviceWorker';
 
 import {BrowserRouter as Router , Switch , Route } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
 
-const browserHistory = createBrowserHistory();
 
 const Root = () => {
    return(
-    <Router history={browserHistory}>
+    <Router >
         <Switch>
             <Route exact path ="/" component = {App}/>
             <Route path ="/login" component = {Login}/>
