@@ -98,9 +98,7 @@ class register extends Component {
                     <div className="btn" onClick={this.handleSubmit}>Register</div>
                     <Button size='mini' id="react_btn" loading>Loading</Button>
 
-                    <p id="prompt">Already a user? 
-                    <Link to="/login" className="authLink" id="login">
-                    LOGIN
+                    <p id="prompt">Already a user? <Link to="/login" className="authLink" id="login"> LOGIN
                     </Link> 
                     </p>
 

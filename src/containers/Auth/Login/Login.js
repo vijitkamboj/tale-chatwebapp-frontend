@@ -21,7 +21,7 @@ class login extends Component {
                         <input name="password" type="password" />
                     </div>
                     <div className="btn" >Login</div>
-                    <p id="prompt">Haven't Registered? <Link to="/register"> REGISTER</Link></p>
+                    <p id="prompt">Haven't Registered? <Link to="/register" className="authLink" id="register"> REGISTER</Link></p>
                 </div>
             </div>
         )
