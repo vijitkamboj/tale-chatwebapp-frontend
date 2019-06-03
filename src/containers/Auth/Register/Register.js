@@ -1,9 +1,11 @@
 import React,{ Component } from 'react';
-import './Register.css'
-import Logo from '../logo';
-import Nav from '../../../components/Nav/Nav'
 import {Link} from 'react-router-dom'
 import firebase from '../../../firebase'
+import './Register.css'
+
+import Logo from '../logo';
+import Nav from '../../../components/Nav/Nav'
+
 
 class register extends Component {
     constructor(){
@@ -93,7 +95,13 @@ class register extends Component {
                     </div>
                     
                     <div className="btn" onClick={this.handleSubmit}>Register</div>
-                    <p id="prompt">Already a user? <Link to="/login" className="authLink" id="login">LOGIN</Link> </p>
+
+                    <p id="prompt">Already a user? 
+                    <Link to="/login" className="authLink" id="login">
+                    LOGIN
+                    </Link> 
+                    </p>
+
                 </div>
             </div>
         )
