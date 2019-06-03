@@ -98,3 +98,11 @@
         p#prompt{
             color:rgb(121, 120, 120)
         }
+        .authLink#register{
+            color:rgb(121, 120, 120)
+        }
+        .authLink#login{
+            display: inline;
+            color: rgb(255, 139, 139)
+        }
+       

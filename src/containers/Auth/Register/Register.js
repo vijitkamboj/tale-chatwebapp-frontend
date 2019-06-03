@@ -31,25 +31,30 @@ class register extends Component {
             <div id="register">
                 <Logo/>
                 <div className="form-cont">
+
                     <div className="form-header">Register Yourself</div>
                     <div className="field">
                         <div className="name">Username</div>
                         <input name="username" type="text" onChange={this.handleChange}/>
                     </div>
+
                     <div className="field">
                         <div className="name">Email</div>
                         <input name="email" type="email" onChange ={this.handleChange} />
                     </div>
+
                     <div className="field">
                         <div className="name">Password</div>
                         <input name="password" type="password" onChange={this.handleChange}/>
                     </div>
+
                     <div className="field">
                         <div className="name">Confirm Password</div>
                         <input name="passwordConfirmation" type="password" onChange={this.handleChange}/>
                     </div>
-                    <div className="btn" onClick={this.handleSubmit}>Register</div>
-                    <p id="prompt">Already a user? <Link to="/login">LOGIN</Link> </p>
+                    
+                    <div className="btn" onClick={this.handleSubmit}><Link to="/login" className="authLink" id="register">Register</Link></div>
+                    <p id="prompt">Already a user? <Link to="/login" className="authLink" id="login">LOGIN</Link> </p>
                 </div>
             </div>
         )
