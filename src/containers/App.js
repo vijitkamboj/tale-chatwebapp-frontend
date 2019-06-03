@@ -6,9 +6,12 @@ class App extends Component {
 
 	render(){
 		document.body.className = "app-back"
-		return(	<div className="App">
-		Home
-	</div>)
+		return(
+			<div class="app">
+				<div id="app-cover"></div>
+				<div id="app-intro"></div>
+			</div>
+		)
 
 	}
 }
