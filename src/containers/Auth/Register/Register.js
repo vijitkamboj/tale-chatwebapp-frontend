@@ -30,7 +30,7 @@ class register extends Component {
             firebase.auth()
             .createUserWithEmailAndPassword(this.state.email,this.state.password)
             .then( createdUser => console.log(createdUser))
-            .catch(err => console.log(err))
+            .catch(err => console.error(err))
         }
     }
 
@@ -94,7 +94,7 @@ class register extends Component {
                         <div className="name">Confirm Password</div>
                         <input className="form" name="passwordConfirmation" type="password" onChange={this.handleChange}/>
                     </div>
-                    <Button id="btn-register" onClick={this.handleSubmit} loading>Loading</Button>
+                    <Button id="btn-register" onClick={this.handleSubmit} >Register</Button>
 
                     <p id="prompt">Already a user? <Link to="/login" className="authLink" id="login"> LOGIN
                     </Link> 

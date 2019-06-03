@@ -21,7 +21,7 @@ class login extends Component {
                         <div className="name">Password</div>
                         <input className="form" name="password" type="password" />
                     </div>
-                    <Button id="btn-login" onClick={this.handleSubmit} loading>Login</Button>
+                    <Button id="btn-login" onClick={this.handleSubmit} >Login</Button>
                     <p id="prompt">Haven't Registered? <Link to="/register" className="authLink" id="register"> REGISTER</Link></p>
                 </div>
             </div>
