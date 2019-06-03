@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Logo from '../logo';
+import Nav from '../../../components/Nav/Nav';
 import {Link} from 'react-router-dom'
 
 class login extends Component {
@@ -7,6 +8,7 @@ class login extends Component {
         document.body.className = "reg-back";
         return(
             <div id="login">
+            <Nav />
                 <Logo/>
                 <div className="form-cont">
                     <div className="form-header">Login</div>
