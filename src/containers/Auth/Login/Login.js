@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Logo from '../logo';
 import Nav from '../../../components/Nav/Nav';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import { Button } from 'semantic-ui-react'
 
 class login extends Component {
     render(){
@@ -14,13 +15,13 @@ class login extends Component {
                     <div className="form-header">Login</div>
                     <div className="field">
                         <div className="name">Email</div>
-                        <input name="email" type="email" />
+                        <input className="form" name="email" type="email" />
                     </div>
                     <div className="field">
                         <div className="name">Password</div>
-                        <input name="password" type="password" />
+                        <input className="form" name="password" type="password" />
                     </div>
-                    <div className="btn" >Login</div>
+                    <Button id="btn-login" onClick={this.handleSubmit} loading>Login</Button>
                     <p id="prompt">Haven't Registered? <Link to="/register" className="authLink" id="register"> REGISTER</Link></p>
                 </div>
             </div>

@@ -77,26 +77,24 @@ class register extends Component {
                     <div className="form-header">Register Yourself</div>
                     <div className="field">
                         <div className="name">Username</div>
-                        <input name="username" type="text" onChange={this.handleChange}/>
+                        <input className="form" name="username" type="text" onChange={this.handleChange}/>
                     </div>
 
                     <div className="field">
                         <div className="name">Email</div>
-                        <input name="email" type="email" onChange ={this.handleChange} />
+                        <input className="form" name="email" type="email" onChange ={this.handleChange} />
                     </div>
 
                     <div className="field">
                         <div className="name">Password</div>
-                        <input name="password" type="password" onChange={this.handleChange}/>
+                        <input className="form" name="password" type="password" onChange={this.handleChange}/>
                     </div>
 
                     <div className="field">
                         <div className="name">Confirm Password</div>
-                        <input name="passwordConfirmation" type="password" onChange={this.handleChange}/>
+                        <input className="form" name="passwordConfirmation" type="password" onChange={this.handleChange}/>
                     </div>
-                    
-                    <div className="btn" onClick={this.handleSubmit}>Register</div>
-                    <Button size='mini' id="react_btn" loading>Loading</Button>
+                    <Button id="btn-register" onClick={this.handleSubmit} loading>Loading</Button>
 
                     <p id="prompt">Already a user? <Link to="/login" className="authLink" id="login"> LOGIN
                     </Link> 
