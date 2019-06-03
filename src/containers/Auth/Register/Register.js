@@ -1,7 +1,8 @@
 import React,{ Component } from 'react';
 import {Link} from 'react-router-dom'
 import firebase from '../../../firebase'
-import './Register.css'
+import './Register.css';
+import { Button } from 'semantic-ui-react'
 
 import Logo from '../logo';
 import Nav from '../../../components/Nav/Nav'
@@ -95,6 +96,7 @@ class register extends Component {
                     </div>
                     
                     <div className="btn" onClick={this.handleSubmit}>Register</div>
+                    <Button size='mini' id="react_btn" loading>Loading</Button>
 
                     <p id="prompt">Already a user? 
                     <Link to="/login" className="authLink" id="login">

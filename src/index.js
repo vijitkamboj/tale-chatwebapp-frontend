@@ -5,6 +5,7 @@ import App from './containers/App';
 import Login from './containers/Auth/Login/Login';
 import Register from './containers/Auth/Register/Register'
 import * as serviceWorker from './serviceWorker';
+import 'semantic-ui-css/semantic.min.css';
 
 import {BrowserRouter as Router , Switch , Route } from 'react-router-dom';
 
