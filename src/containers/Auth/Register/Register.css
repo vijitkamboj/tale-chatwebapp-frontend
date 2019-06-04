@@ -90,12 +90,13 @@
             
             border-bottom: 2px solid rgb(255, 139, 139);
             border-radius: 0px;
+            
             background-color: transparent;
             font-size:15px;
             font-weight: lighter;
             color:rgb(121, 120, 120) ;
         }
-        p#prompt{
+        p#suggestion{
             color:rgb(121, 120, 120);
             margin-bottom: 5px;
         }
