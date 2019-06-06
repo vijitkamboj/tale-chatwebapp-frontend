@@ -45,32 +45,33 @@ class register extends Component {
 			firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password) // registering user
 				.then(createdUser => {
 
-					this.setState({
-						loading: false,
-						status: 'Registered',
-						password: '',
-						passwordConfirmation: ''
-					}) // stop loading and change status and clear password field and proceed towards storing user
-
 					createdUser.user.updateProfile({
 							displayName: this.state.username,
 							photoURL: `http://gravatar.com/avatar/${md5(createdUser.user.email)}?d=identicon`
-						})
+						}) // updating the registered user profile
 						.then(
 							() => {
 								const temp = createdUser
 								this.saveUser(temp)
-								.then(console.log("success"))
+								.then(()=> {
+									this.setState({
+										loading: false,
+										status: 'Registered',
+										password: '',
+										passwordConfirmation: ''
+									}) // stop loading and change status and clear password fields
+								})
+
 								.catch(err => {
 									this.setState({
-										errors: this.state.errors.concat(err),
-									}) // concat erorrs
+										errors: this.state.errors.concat({message:"Registered you but error while saving your profile"}),
+									}) // concat erorr
 								})
 							}
 						)
 						.catch(err => this.setState({
-							errors: this.state.errors.concat(err),
-						}))
+							errors: this.state.errors.concat({message:"Registered you but error while updating your profile"}),
+						})) // concat error
 				})
 				.catch(err => {
 					this.setState({
@@ -128,16 +129,16 @@ class register extends Component {
 		}
 	} // method to check if password is confirmed
 
-	displayError =(errors) => errors.map((error,i) => <p key ={i}>{error.message}</p> );
+	displayError =(errors) => errors.map((error,i) => <p key ={i}>{error.message}</p> ); // Generates <p> tags based on errors
 
 	handleEnter = (event) =>{
 		if (event.keyCode === 13){
 			(this.handleSubmit(event))
 		}
-	}
+	} // checks if ENTER key is pressed
 
 	render(){
-		document.body.className = 'reg-back';
+		document.body.className = 'reg-back'; // change the background when routed to register component
 
 		const {
 			username,
