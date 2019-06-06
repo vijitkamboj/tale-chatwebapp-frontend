@@ -1,0 +1,16 @@
+.home-back{
+    
+}
+
+#home-cover{
+    width: 100%;
+    height: 500px;
+    background-image: url(./cover-banner.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+#home-intro{
+    width: 100%;
+    height: 500px
+}
