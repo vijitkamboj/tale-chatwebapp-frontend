@@ -5,7 +5,7 @@ import './Register.css';
 import { Button,Message } from 'semantic-ui-react';
 import md5 from 'md5'
 
-import Logo from '../logo';
+import Logo from '../Logo';
 
 
 
@@ -158,7 +158,7 @@ class register extends Component {
 
 		return(
 			<div id="register">
-				<Logo/>
+				<Logo Link = {Link}/>
 				<div className="form-cont"  onKeyDown={handleEnter}>
 
 					<div className="form-header">

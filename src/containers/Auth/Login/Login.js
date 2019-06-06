@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import firebase from '../../../firebase'
 import { Button,Message } from 'semantic-ui-react';
 
-import Logo from '../logo';
+import Logo from '../Logo';
 
 class login extends Component {
 	constructor(){
@@ -43,9 +43,9 @@ class login extends Component {
                     })
                 })
                 .catch( err => {
-                    this.state({
+                    this.setState({
                         loading:false,
-                        errors : this.state.errors.concat({message : err})
+                        errors : this.state.errors.concat(err)
                     })
                 })
         }
@@ -98,7 +98,7 @@ class login extends Component {
 
 		return(
 			<div id="login">
-				<Logo/>
+				<Logo Link = {Link}/>
 				<div className="form-cont"  onKeyDown={handleEnter}>
 
 					<div className="form-header">

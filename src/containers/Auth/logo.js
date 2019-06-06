@@ -1,14 +1,15 @@
 import React from 'react';
 import logo from './logo.png'
 
-const Logo = () => <img 
-                    src={logo} 
-                    alt="logo" 
-                    id="logo" 
-                    height="150px" 
-                    width="auto" 
-                    style={{padding : "8px" , alignSelf : "flex-start"}}
-                        
-                    />
+const Logo = ({Link}) => <Link to = "/" style={{margin : "8px" , alignSelf : "flex-start"}}>
+                            <img 
+                            src={logo} 
+                            alt="logo" 
+                            id="logo" 
+                            height="150px" 
+                            width="auto" 
+                            
+                            />
+                        </Link> 
 
 export default Logo
