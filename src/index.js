@@ -6,7 +6,7 @@ import './index.css';
 import Home from './components/Home/Home';
 import Login from './containers/Auth/Login/Login';
 import Register from './containers/Auth/Register/Register';
-import App from './containers/App';
+import App from './components/App/App';
 import LoadingScreen from "./LoadingScreen"
 
 import * as serviceWorker from './serviceWorker';
