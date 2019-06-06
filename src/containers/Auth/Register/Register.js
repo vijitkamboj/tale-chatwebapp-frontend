@@ -2,7 +2,8 @@ import React,{ Component } from 'react';
 import {Link} from 'react-router-dom'
 import firebase from '../../../firebase'
 import './Register.css';
-import { Button,Message } from 'semantic-ui-react'
+import { Button,Message } from 'semantic-ui-react';
+import md5 from 'md5'
 
 import Logo from '../logo';
 
@@ -18,7 +19,9 @@ class register extends Component {
 			passwordConfirmation:'',
 			errors: [],
 			loading:false,
-			status:'Register'
+			status:'Register',
+			userFire : firebase.firestore(),
+			userRef: firebase.database().ref('users')
 		}  // defining state for registration form
 	}
 
@@ -27,7 +30,7 @@ class register extends Component {
 			[event.target.name]: event.target.value,
 			errors: [],
 			status: 'Register'
-		}) // clering errors and status to register
+		}) // clering errors and status to register and fiels states
 	} // method to handle change in the feilds
 
 	handleSubmit = (event) => {
@@ -40,14 +43,32 @@ class register extends Component {
 			}) // starting loading and clearing previous errors
 
 			firebase.auth()
-				.createUserWithEmailAndPassword(this.state.email, this.state.password) // creating user
+				.createUserWithEmailAndPassword(this.state.email, this.state.password) // registering user
 				.then(createdUser => {
+					
 					this.setState({
 						loading: false,
 						status: 'Registered',
 						password: '',
 						passwordConfirmation: ''
-					}) // stop loading and change status to registered
+					}) // stop loading and change status and clear password field and proceed towards storing user
+					
+					createdUser.user.updateProfile({
+							displayName: this.state.username,
+							photoURL: `http://gravatar.com/avatar/${md5(createdUser.user.email)}?d=identicon`
+						})
+						.then(
+							() => {
+								const temp = createdUser;
+								this.saveUser(temp).then(console.log("success")).catch(err => {
+								this.setState({
+									errors: this.state.errors.concat(err),
+								}) // concat erorrs
+							})}
+						)
+						.catch(err => this.setState({
+							errors: this.state.errors.concat(err),
+						})) 
 				})
 				.catch(err => {
 					this.setState({
@@ -57,6 +78,16 @@ class register extends Component {
 				})
 		}
 	} // method to handle the submit event
+
+	saveUser = (createdUser) => {
+			return(
+				this.state.userFire.collection("users").doc(`${createdUser.user.uid}`).set({
+					name:createdUser.user.displayName,
+					avatar:createdUser.user.photoURL
+				}
+			)
+		)
+	}// saving extra info about users in database
 
 	isFormValid = () => {
 		let errors = []
@@ -102,7 +133,6 @@ class register extends Component {
 			(this.handleSubmit(event))
 		}
 	}
-	
 
 	render(){
 		document.body.className = 'reg-back';
