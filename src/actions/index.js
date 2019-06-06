@@ -7,4 +7,4 @@ export const setUser = (user) => {
             currentUser: user
         }
     })
-}
+}// used to change the current user state

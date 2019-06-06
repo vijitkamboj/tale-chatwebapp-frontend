@@ -16,10 +16,10 @@ const user_reducer = (state = initialUserState ,action) => {
         default:
             return state;
     }
-}
+}// generates states in the store
 
 const rootReducer = combineReducers({
     user : user_reducer
-})
+})// makes a tree of states with user as a branch of root , initially it is initialUserState
 
 export default rootReducer;

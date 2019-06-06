@@ -33,7 +33,7 @@ class Root extends Component {
                 this.props.history.push("/")
             }
         })
-    } // automatically routing the user to app if user is logged in 
+    } // automatically routing the user to app if any user is logged in 
 
     render(){
         document.body.className = 'none';
@@ -48,10 +48,11 @@ class Root extends Component {
     }
 }
 
-const mapStateFromProps = (state) => ({isLoading:state.user.isLoading})
+const mapStateFromProps = (state) => ({isLoading:state.user.isLoading}) 
 
 
-const RootWithAuth = withRouter(connect( mapStateFromProps ,{setUser})(Root));  // higher order component
+const RootWithAuth = withRouter(connect( mapStateFromProps ,{setUser})(Root));  //connect (mapStateToProps , mapDispatchToProps)
+// higher order component and pass isLoading state and setUser method as props to Root Componenet
 
 ReactDOM.render(<Provider store = {store}><Router><RootWithAuth /></Router></Provider>, document.getElementById('root'));
 
