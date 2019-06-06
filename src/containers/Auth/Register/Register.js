@@ -243,13 +243,13 @@ class register extends Component {
 					}
 					
 					<p id="suggestion">
-						Already a user? 
+						Already a user ? 
 						<Link 
 						to="/login" 
 						className="authLink" 
-						id="login"
+						id="register"
 						>
-							 LOGIN
+							{" LOGIN"}
 						</Link> 
 					</p>
 
