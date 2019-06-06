@@ -42,8 +42,7 @@ class register extends Component {
 				errors: []
 			}) // starting loading and clearing previous errors
 
-			firebase.auth()
-				.createUserWithEmailAndPassword(this.state.email, this.state.password) // registering user
+			firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password) // registering user
 				.then(createdUser => {
 
 					this.setState({
@@ -59,8 +58,10 @@ class register extends Component {
 						})
 						.then(
 							() => {
-								const temp = createdUser;
-								this.saveUser(temp).then(console.log("success")).catch(err => {
+								const temp = createdUser
+								this.saveUser(temp)
+								.then(console.log("success"))
+								.catch(err => {
 									this.setState({
 										errors: this.state.errors.concat(err),
 									}) // concat erorrs
