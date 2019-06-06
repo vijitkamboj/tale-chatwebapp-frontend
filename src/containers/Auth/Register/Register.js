@@ -45,14 +45,14 @@ class register extends Component {
 			firebase.auth()
 				.createUserWithEmailAndPassword(this.state.email, this.state.password) // registering user
 				.then(createdUser => {
-					
+
 					this.setState({
 						loading: false,
 						status: 'Registered',
 						password: '',
 						passwordConfirmation: ''
 					}) // stop loading and change status and clear password field and proceed towards storing user
-					
+
 					createdUser.user.updateProfile({
 							displayName: this.state.username,
 							photoURL: `http://gravatar.com/avatar/${md5(createdUser.user.email)}?d=identicon`
@@ -61,14 +61,15 @@ class register extends Component {
 							() => {
 								const temp = createdUser;
 								this.saveUser(temp).then(console.log("success")).catch(err => {
-								this.setState({
-									errors: this.state.errors.concat(err),
-								}) // concat erorrs
-							})}
+									this.setState({
+										errors: this.state.errors.concat(err),
+									}) // concat erorrs
+								})
+							}
 						)
 						.catch(err => this.setState({
 							errors: this.state.errors.concat(err),
-						})) 
+						}))
 				})
 				.catch(err => {
 					this.setState({
@@ -81,7 +82,7 @@ class register extends Component {
 
 	saveUser = (createdUser) => {
 			return(
-				this.state.userFire.collection("users").doc(`${createdUser.user.uid}`).set({
+				this.state.userRef.child(createdUser.user.uid).set({
 					name:createdUser.user.displayName,
 					avatar:createdUser.user.photoURL
 				}
