@@ -13,7 +13,6 @@ class login extends Component {
 			password:'',
 			errors: [],
 			loading:false,
-			userRef: firebase.database().ref('users')
 		}  // defining state for login form
 	}
 
@@ -25,10 +24,32 @@ class login extends Component {
 	} // method to handle change in the feilds
 
 	handleSubmit = (event) => {
-		
+        event.preventDefault();
+        if (this.isFormValid){
+
+            this.setState({
+                loading: true,
+                error: []
+            })
+
+            firebase
+                .auth()
+                .signInWithEmailAndPassword(this.state.email, this.state.password)
+                .then( signedInUser => {
+                    console.log(signedInUser);
+                    this.setState({
+                        loading:false,
+                        password:''
+                    })
+                })
+                .catch( err => {
+                    this.state({
+                        loading:false,
+                        errors : this.state.errors.concat({message : err})
+                    })
+                })
+        }
 	} // method to handle the submit event
-
-
 
 	isFormValid = () => {
 		let errors = []
@@ -51,8 +72,6 @@ class login extends Component {
 		!email.length || !password.length
 	)} // method to check if form is empty
 
-
-
 	displayError =(errors) => errors.map((error,i) => <p key ={i}>{error.message}</p> ); // Generates <p> tags based on errors
 
 	handleEnter = (event) =>{
@@ -62,7 +81,7 @@ class login extends Component {
 	} // checks if ENTER key is pressed
 
 	render(){
-		document.body.className = 'reg-back'; // change the background when routed to register component
+		document.body.className = 'reg-back'; // change the background when routed to login component
 
 		const {
 			email,
@@ -142,7 +161,7 @@ class login extends Component {
 						className="authLink" 
 						id="login"
 						>
-							{" REGISTER"}
+							{" Register"}
 						</Link> 
 					</p>
 

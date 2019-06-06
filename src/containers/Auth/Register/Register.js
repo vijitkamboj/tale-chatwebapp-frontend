@@ -249,7 +249,7 @@ class register extends Component {
 						className="authLink" 
 						id="register"
 						>
-							{" LOGIN"}
+							{" Login"}
 						</Link> 
 					</p>
 
