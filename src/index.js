@@ -10,21 +10,24 @@ import App from './containers/App';
 
 import * as serviceWorker from './serviceWorker';
 
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import {composeWithDevTools} from 'redux-devtools-extension'
+import {BrowserRouter as Router , Switch , Route ,withRouter} from 'react-router-dom';
 import 'semantic-ui-css/semantic.min.css';
 import firebase from './firebase'
 
-import {BrowserRouter as Router , Switch , Route ,withRouter} from 'react-router-dom';
+const store = createStore(() => {} , composeWithDevTools())
 
 
 class Root extends Component {
     componentDidMount(){
         firebase.auth().onAuthStateChanged( user => {
             if(user){
-                console.log(user)
                 this.props.history.push("/")
             }
         })
-    }
+    } // automatically routing the user to app if user is logged in 
 
     render(){
         document.body.className = 'none';
@@ -39,9 +42,9 @@ class Root extends Component {
     }
 }
 
-const RootWithAuth = withRouter(Root);
+const RootWithAuth = withRouter(Root);  // higher order component
 
-ReactDOM.render(<Router><RootWithAuth /></Router>, document.getElementById('root'));
+ReactDOM.render(<Provider store = {store}><Router><RootWithAuth /></Router></Provider>, document.getElementById('root'));
 
 
 serviceWorker.register();
