@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 class ColorPanel extends Component{
     render(){
         return(
-            <div id="ColorPanel">!</div>
+            <div id="color-panel"></div>
         )
     }
 }

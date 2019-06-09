@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 class MessagePanel extends Component{
     render(){
         return(
-            <div id="MessagePanel">3</div>
+            <div id="message-panel"></div>
         )
     }
 }

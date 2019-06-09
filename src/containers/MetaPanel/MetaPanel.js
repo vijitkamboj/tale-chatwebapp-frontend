@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 class MetaPanel extends Component{
     render(){
         return(
-            <div id="MetaPanel">4</div>
+            <div id="meta-panel">4</div>
         )
     }
 }
