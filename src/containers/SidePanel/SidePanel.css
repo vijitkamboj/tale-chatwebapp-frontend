@@ -1,4 +1,10 @@
 #side-panel{
-    width:20%;
-    background-color: aquamarine;
+    width:250px;
+    background-color : rgba(56, 56, 56, 0.466);
+    font-size: 5px;
+    font-weight: lighter;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 20px;
+    margin:8px;
+    margin-left: 0px;
 }

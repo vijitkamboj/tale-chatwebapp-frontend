@@ -8,6 +8,7 @@ import MetaPanel from "../MetaPanel/MetaPanel"
 
 
 const App = () => {
+    document.body.className = "app-body"
     return(
         <div id="app">
             <ColorPanel />

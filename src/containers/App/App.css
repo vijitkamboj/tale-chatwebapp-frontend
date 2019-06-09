@@ -1,3 +1,9 @@
+.app-body{
+    background-image: url(./app-back.jpg);
+    background-size: cover;
+    background-position: bottom;
+    background-attachment: fixed
+}
 #app {
     display: flex;
     flex-direction: row;
