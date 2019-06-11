@@ -52,10 +52,10 @@ class Root extends Component {
     }
 }
 
-const mapStateFromProps = (state) => ({isLoading:state.user.isLoading}) 
+const mapStateToProps = (state) => ({isLoading:state.user.isLoading}) 
 
 
-const RootWithAuth = withRouter(connect( mapStateFromProps ,{setUser,clearUser})(Root));  //connect (mapStateToProps , mapDispatchToProps)
+const RootWithAuth = withRouter(connect( mapStateToProps ,{setUser,clearUser})(Root));  //connect (mapStateToProps , mapDispatchToProps)
 // higher order component and pass isLoading state and setUser method as props to Root Componenet
 
 ReactDOM.render(<Provider store = {store}><Router><RootWithAuth /></Router></Provider>, document.getElementById('root'));
