@@ -14,7 +14,7 @@ class UserPanel extends Component {
         [
             {   
                 key:"user",
-                text:<span>Signed in as <strong>User</strong></span>,
+                text:<span>Signed in as <strong>{this.props.currentUser.displayName}</strong></span>,
                 disabled:true
             },
             {

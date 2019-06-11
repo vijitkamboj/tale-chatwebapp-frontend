@@ -7,7 +7,7 @@ class SidePanel extends Component{
     render(){
         return(
             <div id="side-panel">
-                <UserPanel />
+                <UserPanel currentUser = {this.props.currentUser}/>
             </div>
         )
     }
