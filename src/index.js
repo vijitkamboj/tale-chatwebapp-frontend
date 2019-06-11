@@ -20,7 +20,7 @@ import firebase from './firebase';
 import {createStore} from 'redux';
 import {Provider ,connect} from 'react-redux';
 import rootReducer from "./reducers";
-import {setUser} from "./actions/index"
+import {setUser,clearUser} from "./actions/index"
 
 const store = createStore( rootReducer , composeWithDevTools()) //created store for global state
 
@@ -31,6 +31,10 @@ class Root extends Component {
             if(user){
                 this.props.setUser(user)
                 this.props.history.push("/")
+            }
+            else{
+                this.props.history.push("/home") 
+                this.props.clearUser();
             }
         })
     } // automatically routing the user to app if any user is logged in 
@@ -51,7 +55,7 @@ class Root extends Component {
 const mapStateFromProps = (state) => ({isLoading:state.user.isLoading}) 
 
 
-const RootWithAuth = withRouter(connect( mapStateFromProps ,{setUser})(Root));  //connect (mapStateToProps , mapDispatchToProps)
+const RootWithAuth = withRouter(connect( mapStateFromProps ,{setUser,clearUser})(Root));  //connect (mapStateToProps , mapDispatchToProps)
 // higher order component and pass isLoading state and setUser method as props to Root Componenet
 
 ReactDOM.render(<Provider store = {store}><Router><RootWithAuth /></Router></Provider>, document.getElementById('root'));

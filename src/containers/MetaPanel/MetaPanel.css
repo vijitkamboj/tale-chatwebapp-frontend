@@ -1,3 +1,7 @@
 #meta-panel{
-    width: 20%;
+    flex:1;
+    background-color: rgba(165, 42, 42, 0.233);
+    margin:8px;
+    margin-left:0px;
+    border-radius:5px;
 }

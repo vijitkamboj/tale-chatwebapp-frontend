@@ -8,3 +8,12 @@ export const setUser = (user) => {
         }
     })
 }// used to change the current user state
+
+export const clearUser = () => {
+    return({
+        type: actionTypes.CLEAR_USER,
+        payload: {
+            currentUser: null
+        }
+    })
+}

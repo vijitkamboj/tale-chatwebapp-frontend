@@ -1,10 +1,12 @@
 #side-panel{
-    width:250px;
-    background-color : rgba(56, 56, 56, 0.466);
+    display: flex;
+    flex-direction: column;
+    width:280px;
+    background-color : rgb(2, 65, 73);
     font-size: 5px;
     font-weight: lighter;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    border-radius: 20px;
+    border-radius: 5px;
     margin:8px;
     margin-left: 0px;
 }
