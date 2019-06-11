@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import firebase from "../../../firebase"
 import logo from "../logo.png"
 import "./UserPanel.css";
-import {Dropdown} from "semantic-ui-react"
+import {Dropdown , Image} from "semantic-ui-react"
 
 
 class UserPanel extends Component {
+
     handleSignOut = () => {
         firebase.auth().signOut().then(console.log("signout"))
     }
     dropDownOptions =()=>{
+    
       return(
         [
             {   
@@ -32,20 +34,26 @@ class UserPanel extends Component {
     }
 
     render(){
-        return(
-            <div id="user-panel">
-                <div id="user-panel-header">
-                    <img src={logo} alt="logo" style={{height: "40px" , width:"auto" , margin:"10px"}}/>
-                    Tale
+            return(
+                <div id="user-panel">
+                    <div id="user-panel-header">
+                        <img src={logo} alt="logo" style={{height: "40px" , width:"auto" , margin:"10px"}}/>
+                        Tale
+                    </div>
+                    <Dropdown 
+                    id="user-panel-dropdown" 
+                    trigger={
+                        <span>
+                            <Image src={this.props.currentUser.photoURL} spaced="right" avatar/>
+                            {this.props.currentUser.displayName}
+                        </span>
+                    } 
+                    options={this.dropDownOptions()}
+                    />
                 </div>
-                <Dropdown 
-                id="user-panel-dropdown" 
-                trigger={<span>My Account</span>} 
-                options={this.dropDownOptions()}
-                />
-            </div>
-            
-        )
+                
+            )
+        
     }
 }
 
