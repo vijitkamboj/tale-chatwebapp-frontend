@@ -22,7 +22,7 @@ class SidePanel extends Component{
             },
             {
                 key:"signout",
-                text:<span onClick={this.handleSignOut}><a href="/home">Sign Out</a></span>,
+                text:<span onClick={this.handleSignOut}>Sign Out</span>,
                 disabled:false
             }
         ]

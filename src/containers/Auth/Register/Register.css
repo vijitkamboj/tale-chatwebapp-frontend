@@ -37,7 +37,7 @@
 
 	    font-size: 30px;
 	    color: rgb(121, 120, 120);
-	    border-bottom: 2px solid rgb(255, 139, 139);
+	    border-bottom: 2px solid rgb(255,153,153);
 	}
 
 	.field{
@@ -89,7 +89,7 @@
 			height: auto;
 			width:fit-content;
 			
-			border-bottom: 2px solid rgb(255, 139, 139);
+			border-bottom: 2px solid rgb(255,153,153);
 			border-radius: 0px;
 			
 			background-color: transparent;
@@ -101,17 +101,16 @@
 	    padding: 10px;
 	    height: auto;
 	    font-size: 15px;
-	    background-color: rgba(255, 139, 139, 0.13);
+	    background-color: rgba(255, 153, 153, 0.13);
 	    color:red
 	}
 
 	p#suggestion{
 	    color:rgb(121, 120, 120);
 	    margin-bottom: 5px;
-	    /* margin-top: 5px; */
 	}
 	.authLink#login,.authLink#register{
-	    color:rgb(255, 139, 139);
+	    color:rgb(255,153,153);
 	    display: inline;
 	}
      
