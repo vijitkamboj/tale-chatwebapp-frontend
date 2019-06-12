@@ -8,7 +8,7 @@ import {Dropdown , Image} from "semantic-ui-react"
 class UserPanel extends Component {
 
     handleSignOut = () => {
-        firebase.auth().signOut().then(console.log("signout"))
+        firebase.auth().signOut()
     }
     dropDownOptions =()=>{
     
@@ -49,6 +49,7 @@ class UserPanel extends Component {
                         </span>
                     } 
                     options={this.dropDownOptions()}
+                    pointing
                     />
                 </div>
                 
