@@ -1,6 +1,6 @@
 #color-panel{
     width:50px;
-    background-color: rgb(182, 178, 178);
+    background-color: rgba(182, 178, 178, 0);
     border-radius: 5px;
     margin: 12px;
 }
