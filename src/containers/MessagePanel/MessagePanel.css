@@ -1,7 +1,7 @@
 #message-panel{
     width: 750px;
     background-color: rgb(187, 187, 187);
-    margin:8px;
+    margin:12px;
     margin-left:0;
     border-radius:5px
 }

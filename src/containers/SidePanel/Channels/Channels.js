@@ -1,6 +1,6 @@
 import "./Channels.css"
 import React, { Component } from 'react';
-import {Icon} from "semantic-ui-react"
+import {Icon, Modal} from "semantic-ui-react"
 
 class Channels extends Component{
 
