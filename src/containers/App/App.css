@@ -1,13 +1,13 @@
 .app-body{
-    background-image: url(./app-back.jpg);
+    /* background-image: url(./app-back.jpg);
     background-size: cover;
     background-position: bottom;
-    background-attachment: fixed
+    background-attachment: fixed */
+    background-color: rgb(255, 255, 255)
 }
 #app {
     display: flex;
     flex-direction: row;
     height: 100%;
     width: 100%;
-    overflow-x: scroll;
 }
