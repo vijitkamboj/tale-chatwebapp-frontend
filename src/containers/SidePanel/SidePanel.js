@@ -1,6 +1,7 @@
 import "./SidePanel.css"
 import React, { Component } from 'react';
 import UserPanel from "./UserPanel/UserPanel"
+import Channels from "./Channels/Channels"
 
 class SidePanel extends Component{
 
@@ -8,6 +9,7 @@ class SidePanel extends Component{
         return(
             <div id="side-panel">
                 <UserPanel currentUser = {this.props.currentUser}/>
+                <Channels />
             </div>
         )
     }

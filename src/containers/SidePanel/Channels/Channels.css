@@ -1,0 +1,12 @@
+#user-panel-channels{
+    display: flex;
+    margin-left: 10px;
+    margin-top: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: lighter;
+    font-size: 15px;
+    color:rgb(182, 178, 178);
+}
+#add{
+    margin-left: auto;
+}
