@@ -12,9 +12,9 @@ class Channels extends Component{
         const {channels} = this.state;
         return(
             <div id="user-panel-channels" >
-                <Icon name="exchange" size="large" color="black" style={{marginRight:"10px"}}/>
+                <Icon name="exchange" size="large" color="white" style={{marginRight:"10px"}}/>
                 Channels ({channels.length})
-                <Icon name="add" size="large" color="black" className="icons" id="add"/>
+                <Icon name="add" size="large" color="white" className="icons" id="add"/>
             </div>
         )
     }
