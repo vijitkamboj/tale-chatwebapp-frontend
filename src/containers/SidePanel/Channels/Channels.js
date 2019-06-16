@@ -23,9 +23,9 @@ class Channels extends Component{
         return(
             <React.Fragment>
                 <div id="user-panel-channels" >
-                    <Icon name="exchange" size="large" color="white" style={{marginRight:"10px"}} />
+                    <Icon name="exchange" size="large" style={{marginRight:"10px"}} />
                     Channels ({channels.length})
-                    <Icon name="add" size="large" color="white" className="icons" id="add" onClick={showModal}/>
+                    <Icon name="add" size="large" className="icons" id="add" onClick={showModal}/>
                 </div>
                 <Modal dimmer={"blurring"} open={modal} closeIcon onClose={closeModal}>
                     

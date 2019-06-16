@@ -51,8 +51,7 @@ class register extends Component {
 						}) // updating the registered user profile
 						.then(
 							() => {
-								const temp = createdUser
-								this.saveUser(temp)
+								this.saveUser(this.createdUser)
 								.then(()=> {
 									this.setState({
 										loading: false,
