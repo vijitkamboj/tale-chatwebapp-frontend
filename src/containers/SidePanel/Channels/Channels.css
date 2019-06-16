@@ -5,9 +5,9 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: lighter;
     font-size: 16px;
-    color:rgb(180, 180, 180);
+    color:white
     
 }
-#add{
+.icons#add{
     margin-left: auto;
 }

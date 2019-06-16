@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React,{ Component } from 'react';
 import firebase from "../../../firebase"
 import logo from "../logo.png"
 import "./UserPanel.css";
@@ -21,39 +21,43 @@ class UserPanel extends Component {
             },
             {
                 key:"avatar",
-                text:<span>Change Avatar</span>,
+                text:<span id="dropdown-btn-change_avatar">Change Avatar</span>,
                 disabled:false
             },
             {
                 key:"signout",
-                text:<span onClick={this.handleSignOut}>Sign Out</span>,
+                text:<span  onClick={this.handleSignOut}>Sign Out</span>,
                 disabled:false
             }
         ]
       )
     }
 
+    componentDidMount(){
+        document.getElementsByClassName("item")[2].addEventListener('click',this.handleSignOut)
+    }
+
     render(){
-            return(
-                <div id="user-panel">
-                    <div id="user-panel-header">
-                        <img src={logo} alt="logo" style={{height: "40px" , width:"auto" , margin:"10px"}}/>
-                        Tale
-                    </div>
-                    <Dropdown 
-                    id="user-panel-dropdown" 
-                    trigger={
-                        <span>
-                            <Image src={this.props.currentUser.photoURL} spaced="right" avatar/>
-                            {this.props.currentUser.displayName}
-                        </span>
-                    } 
-                    options={this.dropDownOptions()}
-                    pointing
-                    />
+        return(
+            <div id="user-panel">
+                <div id="user-panel-header">
+                    <img src={logo} alt="logo" style={{height: "40px" , width:"auto" , margin:"10px"}}/>
+                    Tale
                 </div>
-                
-            )
+                <Dropdown 
+                id="user-panel-dropdown" 
+                trigger={
+                    <span>
+                        <Image src={this.props.currentUser.photoURL} spaced="right" avatar/>
+                        {this.props.currentUser.displayName}
+                    </span>
+                } 
+                options={this.dropDownOptions()}
+                pointing
+                />
+            </div>
+            
+        )
         
     }
 }
