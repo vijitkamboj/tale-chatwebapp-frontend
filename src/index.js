@@ -27,9 +27,9 @@ const store = createStore( rootReducer , composeWithDevTools()) //created store 
 
 class Root extends Component {
     componentDidMount(){
-        firebase.auth().onAuthStateChanged( user => {
-            if(user){
-                this.props.setUser(user)
+        firebase.auth().onAuthStateChanged( currentUser => {
+            if(currentUser){
+                this.props.setUser(currentUser)
                 this.props.history.push("/")
             }
             else{

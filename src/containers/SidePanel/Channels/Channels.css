@@ -8,7 +8,13 @@
     color:white
     
 }
-.icons#add{
+.icon#add{
     margin-left: auto;
     margin-right: 15px;
+}
+.icon#add:hover{
+    cursor: pointer;
+}
+.icon#close:hover{
+    cursor: pointer;
 }

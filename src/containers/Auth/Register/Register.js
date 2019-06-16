@@ -19,7 +19,6 @@ class register extends Component {
 			passwordConfirmation:'',
 			errors: [],
 			loading:false,
-			status:'Register',
 			userFire : firebase.firestore(),
 			userRef: firebase.database().ref('users')
 		}  // defining state for registration form
@@ -44,23 +43,15 @@ class register extends Component {
 
 			firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password) // registering user
 				.then(createdUser => {
-
 					createdUser.user.updateProfile({
 							displayName: this.state.username,
 							photoURL: `http://gravatar.com/avatar/${md5(createdUser.user.email)}?d=identicon`
 						}) // updating the registered user profile
+					
 						.then(
 							() => {
-								this.saveUser(this.createdUser)
-								.then(()=> {
-									this.setState({
-										loading: false,
-										status: 'Registered',
-										password: '',
-										passwordConfirmation: ''
-									}) // stop loading and change status and clear password fields
-								})
-
+								const temp=createdUser
+								this.saveUser(temp)
 								.catch(err => {
 									this.setState({
 										errors: this.state.errors.concat({message:"Registered you but error while saving your profile"}),
@@ -90,6 +81,14 @@ class register extends Component {
 			)
 		)
 	}// saving extra info about users in database
+
+	componentWillUnmount(){
+		this.setState({
+			loading: false,
+			password: '',
+			passwordConfirmation: ''
+		}) // stop loading and change status and clear password fields
+	}
 
 	isFormValid = () => {
 		let errors = []
@@ -136,6 +135,8 @@ class register extends Component {
 		}
 	} // checks if ENTER key is pressed
 
+
+
 	render(){
 		document.body.className = 'reg-back'; // change the background when routed to register component
 
@@ -145,7 +146,6 @@ class register extends Component {
 			password,
 			passwordConfirmation,
 			loading,
-			status,
 			errors
 		} = this.state;
 		const {
@@ -226,7 +226,7 @@ class register extends Component {
 					className={loading ? 'loading' : ''} 
 					disabled={loading}
 					> 
-						{status}
+						Register
 					</Button>
 
 					{
