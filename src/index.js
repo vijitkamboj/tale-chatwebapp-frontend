@@ -39,7 +39,9 @@ class Root extends Component {
                 if (this.props.register_status !== null) {
                     this.props.history.push("/login")
                     this.props.clearUser();
-                } else {
+                    this.props.changeRegisterStatus(null)
+                } 
+                if(this.props.register_status === null) {
                     this.props.history.push("/home")
                     this.props.clearUser();
                 }
@@ -61,7 +63,7 @@ class Root extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({isLoading:state.user.isLoading , registerStatus:state.user.register_status}) 
+const mapStateToProps = (state) => ({isLoading:state.user.isLoading , register_status:state.user.register_status}) 
 
 
 const RootWithAuth = withRouter(connect( mapStateToProps ,{setUser,clearUser,changeRegisterStatus})(Root));  //connect (mapStateToProps , mapDispatchToProps)

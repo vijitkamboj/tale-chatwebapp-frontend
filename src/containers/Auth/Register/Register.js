@@ -51,7 +51,8 @@ class register extends Component {
 			firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password) // registering user && also automatically signin user
 				.then(createdUser => {
 
-					this.props.changeRegisterStatus("just_registered")
+					this.props.changeRegisterStatus("registered")
+
 					this.setState({
 						loading:false,
 						status:"Registered Successully",
