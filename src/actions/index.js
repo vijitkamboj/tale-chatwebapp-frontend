@@ -17,3 +17,10 @@ export const clearUser = () => {
         }
     })
 }
+
+export const changeRegisterStatus = (value) => {
+   return({
+    type : actionTypes.CHANGE_REGISTER_STATUS,
+    payload: value
+   })
+}

@@ -20,7 +20,7 @@ import firebase from './firebase';
 import {createStore} from 'redux';
 import {Provider ,connect} from 'react-redux';
 import rootReducer from "./reducers";
-import {setUser,clearUser} from "./actions/index"
+import {setUser,clearUser,changeRegisterStatus} from "./actions/index"
 
 const store = createStore( rootReducer , composeWithDevTools()) //created store for global state
 
@@ -30,14 +30,19 @@ class Root extends Component {
 
     componentDidMount() {
         firebase.auth().onAuthStateChanged(currentUser => {
-            if (currentUser) {
+            if (currentUser ) {
                 setTimeout(() => {
                     this.props.setUser(currentUser)
                     this.props.history.push("/app")
-                }, 1500)
-            } else {
-                this.props.history.push("/home")
-                this.props.clearUser();
+                }, 2000)
+            }else {
+                if (this.props.register_status !== null) {
+                    this.props.history.push("/login")
+                    this.props.clearUser();
+                } else {
+                    this.props.history.push("/home")
+                    this.props.clearUser();
+                }
             }
         })
     } // automatically routing the user to chat  console on refreshing if user is already logged in 
@@ -56,10 +61,10 @@ class Root extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({isLoading:state.user.isLoading}) 
+const mapStateToProps = (state) => ({isLoading:state.user.isLoading , registerStatus:state.user.register_status}) 
 
 
-const RootWithAuth = withRouter(connect( mapStateToProps ,{setUser,clearUser})(Root));  //connect (mapStateToProps , mapDispatchToProps)
+const RootWithAuth = withRouter(connect( mapStateToProps ,{setUser,clearUser,changeRegisterStatus})(Root));  //connect (mapStateToProps , mapDispatchToProps)
 // higher order component and pass isLoading state and setUser method as props to Root Componenet
 
 ReactDOM.render(<Provider store = {store}><Router><RootWithAuth /></Router></Provider>, document.getElementById('root'));

@@ -3,7 +3,8 @@ import { combineReducers } from "redux";
 
 const initialUserState ={
     currentUser:null,
-    isLoading:true
+    isLoading:true,
+    register_status:null
 }
 
 const user_reducer = (state = initialUserState ,action) => {
@@ -11,12 +12,18 @@ const user_reducer = (state = initialUserState ,action) => {
         case actionTypes.SET_USER:
                 return({
                     currentUser : action.payload.currentUser,
-                    isLoading:false
+                    isLoading:false,
+                    register_status:false
                 })
         case actionTypes.CLEAR_USER :
             return({
                 currentUser : action.payload.currentUser,
-                isLoading:false
+                isLoading:false,
+                register_status:false
+            })
+        case actionTypes.CHANGE_REGISTER_STATUS :
+            return({
+                register_status:action.payload
             })
         default:
             return state;

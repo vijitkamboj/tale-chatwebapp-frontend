@@ -3,7 +3,9 @@ import {Link} from 'react-router-dom'
 import firebase from '../../../firebase'
 import './Register.css';
 import { Button,Message } from 'semantic-ui-react';
-import md5 from 'md5'
+import md5 from 'md5';
+import {changeRegisterStatus} from "../../../actions/index";
+import {connect} from "react-redux"
 
 import Logo from '../Logo';
 
@@ -35,6 +37,7 @@ class register extends Component {
 	componentWillUnmount(){
 		firebase.auth().signOut();
 	} // signing out user beacuase user is going automatically signed in once it is registered (resulting in issues on user profile update)
+	// executes when another component mounts 
 
 	handleSubmit = (event) => {
 		event.preventDefault();
@@ -48,13 +51,14 @@ class register extends Component {
 			firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password) // registering user && also automatically signin user
 				.then(createdUser => {
 
+					this.props.changeRegisterStatus("just_registered")
 					this.setState({
 						loading:false,
 						status:"Registered Successully",
 						password:'',
 						passwordConfirmation:''
 					})
-
+					
 					createdUser.user.updateProfile({
 							displayName: this.state.username,
 							photoURL: `http://gravatar.com/avatar/${md5(createdUser.user.email)}?d=identicon`
@@ -256,5 +260,10 @@ class register extends Component {
 	}
 }
 
+const mapStateToProps =(state)=>{
+	return({
+		register_status:state.user.register_status
+	})
+}
 
-export default register;
+export default connect(mapStateToProps,{changeRegisterStatus})(register);
