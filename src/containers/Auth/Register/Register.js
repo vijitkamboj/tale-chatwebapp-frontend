@@ -20,17 +20,21 @@ class register extends Component {
 			errors: [],
 			loading:false,
 			userFire : firebase.firestore(),
-			userRef: firebase.database().ref('users')
+			userRef: firebase.database().ref('users'),
+			status:"Register"
 		}  // defining state for registration form
 	}
 
 	handleChange = (event) => {
 		this.setState({
 			[event.target.name]: event.target.value,
-			errors: [],
-			status: 'Register'
-		}) // clering errors and status to register and fiels states
+			errors: []
+		}) // clering errors and store event value
 	} // method to handle change in the feilds
+
+	componentWillUnmount(){
+		firebase.auth().signOut();
+	} // signing out user beacuase user is going automatically signed in once it is registered (resulting in issues on user profile update)
 
 	handleSubmit = (event) => {
 		event.preventDefault();
@@ -41,54 +45,46 @@ class register extends Component {
 				errors: []
 			}) // starting loading and clearing previous errors
 
-			firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password) // registering user
+			firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password) // registering user && also automatically signin user
 				.then(createdUser => {
+
+					this.setState({
+						loading:false,
+						status:"Registered Successully",
+						password:'',
+						passwordConfirmation:''
+					})
+
 					createdUser.user.updateProfile({
 							displayName: this.state.username,
 							photoURL: `http://gravatar.com/avatar/${md5(createdUser.user.email)}?d=identicon`
 						}) // updating the registered user profile
-					
 						.then(
 							() => {
-								const temp=createdUser
-								this.saveUser(temp)
-								.catch(err => {
-									this.setState({
-										errors: this.state.errors.concat({message:"Registered you but error while saving your profile"}),
-									}) // concat erorr
-								})
+								const currentUser= createdUser
+								this.saveUser(currentUser)
+								.catch(err => console.log(0))
 							}
 						)
-						.catch(err => this.setState({
-							errors: this.state.errors.concat({message:"Registered you but error while updating your profile"}),
-						})) // concat error
 				})
 				.catch(err => {
 					this.setState({
 						errors: this.state.errors.concat(err),
 						loading: false
-					}) // stop loading and concat erorrs
+					}) // stop loading and concat registration errors
 				})
 		}
 	} // method to handle the submit event
 
 	saveUser = (createdUser) => {
-			return(
+			return (
 				this.state.userRef.child(createdUser.user.uid).set({
-					name:createdUser.user.displayName,
-					avatar:createdUser.user.photoURL
-				}
+					name: createdUser.user.displayName,
+					avatar: createdUser.user.photoURL
+				})
 			)
-		)
 	}// saving extra info about users in database
 
-	componentWillUnmount(){
-		this.setState({
-			loading: false,
-			password: '',
-			passwordConfirmation: ''
-		}) // stop loading and change status and clear password fields
-	}
 
 	isFormValid = () => {
 		let errors = []
@@ -138,6 +134,7 @@ class register extends Component {
 
 
 	render(){
+		console.log("register")
 		document.body.className = 'reg-back'; // change the background when routed to register component
 
 		const {
@@ -146,13 +143,14 @@ class register extends Component {
 			password,
 			passwordConfirmation,
 			loading,
-			errors
+			errors,
+			status
 		} = this.state;
 		const {
 			handleChange,
 			handleEnter,
 			handleSubmit,
-			displayError
+			displayError,
 		} = this
 
 		return(
@@ -226,9 +224,9 @@ class register extends Component {
 					className={loading ? 'loading' : ''} 
 					disabled={loading}
 					> 
-						Register
+						{status}
 					</Button>
-
+						
 					{
 						errors.length > 0 && (
 						<Message 

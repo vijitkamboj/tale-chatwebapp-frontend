@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Component} from 'react';
 import './App.css';
 import {connect} from "react-redux"
 import ColorPanel from "../ColorPanel/ColorPanel"
@@ -8,16 +8,27 @@ import MetaPanel from "../MetaPanel/MetaPanel"
 // import {Grid} from "semantic-ui-react"
 
 
-const App = ({currentUser}) => {
-    document.body.className = "app-body"
-    return(
-        <div id="app">
-            <ColorPanel />
-            <SidePanel currentUser={currentUser}/>
-            <MessagePanel />
-            <MetaPanel />
-        </div>
-    )
+class App extends Component {
+
+    componentWillMount(){
+        if(!this.props.currentUser){
+            this.props.history.go(0)
+        }
+    }
+    
+    render(){
+        console.log("app");
+        document.body.className = "app-body"
+            return(
+                <div id="app">
+                    <ColorPanel />
+                    <SidePanel currentUser={this.props.currentUser}/>
+                    <MessagePanel />
+                    <MetaPanel />
+                </div>
+            )
+       
+    }
 }
 const mapStateToProps = ({user}) => {
     return({

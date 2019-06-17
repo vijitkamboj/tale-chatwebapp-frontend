@@ -25,25 +25,29 @@ import {setUser,clearUser} from "./actions/index"
 const store = createStore( rootReducer , composeWithDevTools()) //created store for global state
 
 
+    
 class Root extends Component {
-    componentDidMount(){
-        firebase.auth().onAuthStateChanged( currentUser => {
-            if(currentUser){
-                this.props.setUser(currentUser)
-                this.props.history.push("/")
-            }
-            else{
-                this.props.history.push("/home") 
+
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged(currentUser => {
+            if (currentUser) {
+                setTimeout(() => {
+                    this.props.setUser(currentUser)
+                    this.props.history.push("/app")
+                }, 1500)
+            } else {
+                this.props.history.push("/home")
                 this.props.clearUser();
             }
         })
-    } // automatically routing the user to app if any user is logged in 
+    } // automatically routing the user to chat  console on refreshing if user is already logged in 
 
     render(){
+        console.log("index")
         document.body.className = 'none';
         return this.props.isLoading ? <LoadingScreen /> : (
             <Switch>
-                <Route exact path ="/" component = {App}/>
+                <Route exact path ="/app" component = {App} history={this.props.history} />
                 <Route path ="/home" component = {Home}/>
                 <Route path ="/login" component = {Login}/>
                 <Route path ="/register" component = {Register}/>

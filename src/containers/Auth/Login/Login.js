@@ -35,12 +35,6 @@ class login extends Component {
             firebase
                 .auth()
                 .signInWithEmailAndPassword(this.state.email, this.state.password)
-                .then( signedInUser => {
-                    this.setState({
-                        loading:false,
-                        password:''
-                    })
-                })
                 .catch( err => {
                     this.setState({
                         loading:false,
@@ -49,6 +43,7 @@ class login extends Component {
                 })
         }
 	} // method to handle the submit event
+
 
 	isFormValid = () => {
 		let errors = []
@@ -80,6 +75,7 @@ class login extends Component {
 	} // checks if ENTER key is pressed
 
 	render(){
+		console.log("Login");
 		document.body.className = 'reg-back'; // change the background when routed to login component
 
 		const {
