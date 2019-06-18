@@ -16,10 +16,6 @@ class App extends Component {
             this.props.history.go(0)
         }
     } 
-
-    // componentWillUnmount(){
-    //     // on the basis of 
-    // }
     
     render(){
         document.body.className = "app-body"
