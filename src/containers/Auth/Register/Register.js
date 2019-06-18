@@ -37,6 +37,7 @@ class register extends Component {
 		
 	} // signing out user beacuase user is going automatically signed in once it is registered (resulting in issues on user profile update)
 	// executes when another component mounts 
+	// re-unmouting happens when history.push is encountered
 
 	handleSubmit = (event) => {
 		event.preventDefault();

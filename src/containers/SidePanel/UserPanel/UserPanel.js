@@ -29,7 +29,7 @@ class UserPanel extends Component {
             },
             {
                 key:"signout",
-                text:<span  onClick={this.handleSignOut}>Sign Out</span>,
+                text:<span>Sign Out</span>,
                 disabled:false
             }
         ]
