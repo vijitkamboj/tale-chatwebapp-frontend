@@ -5,6 +5,7 @@ import Nav from '../Nav/Nav'
 
 class Home extends Component {
 
+
 	render(){
 		document.body.className = "app-back"
 		return(

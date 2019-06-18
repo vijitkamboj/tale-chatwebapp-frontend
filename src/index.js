@@ -23,9 +23,7 @@ import rootReducer from "./reducers";
 import {setUser,clearUser} from "./actions/index"
 
 const store = createStore( rootReducer , composeWithDevTools()) //created store for global state
-
-
-    
+   
 class Root extends Component {
 
     componentDidMount() {
@@ -51,16 +49,20 @@ class Root extends Component {
         document.body.className = 'none';
         return this.props.isLoading ? <LoadingScreen /> : (
             <Switch>
-                <Route exact path ="/app" component = {App} history={this.props.history} />
-                <Route path ="/home" component = {Home}/>
-                <Route path ="/login" component = {Login}/>
-                <Route path ="/register" component = {Register}/>
+                <Route exact path ="/app" component = {App} />
+                <Route path ="/home" component = {Home} currentUser={this.props.currentUser}/>
+                <Route path ="/login" component = {Login} currentUser={this.props.currentUser}/>
+                <Route path ="/register" component = {Register} currentUser={this.props.currentUser}/>
             </Switch>
         ) 
     }
 }
 
-const mapStateToProps = (state) => ({isLoading:state.user.isLoading , register_status:state.user.register_status}) 
+const mapStateToProps = (state) => ({
+    isLoading: state.user.isLoading,
+    currentUser: state.user.currentUser,
+    register_status: state.user.register_status
+})
 
 
 const RootWithAuth = withRouter(connect( mapStateToProps ,{setUser,clearUser})(Root));  //connect (mapStateToProps , mapDispatchToProps)

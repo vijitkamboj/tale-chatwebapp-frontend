@@ -32,6 +32,7 @@ class register extends Component {
 		}) // clering errors and store event value
 	} // method to handle change in the feilds
 
+
 	componentWillUnmount(){
 		firebase.auth().signOut();
 		

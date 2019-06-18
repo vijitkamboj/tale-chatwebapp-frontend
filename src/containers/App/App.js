@@ -15,6 +15,7 @@ class App extends Component {
             this.props.history.go(0)
         }
     } 
+
     
     render(){
         document.body.className = "app-body"
