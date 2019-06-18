@@ -20,10 +20,6 @@ class login extends Component {
 		}  // defining state for login form
 	}
 
-	componentDidMount(){
-		this.props.changeRegisterStatus(null,null)
-	}
-
 	handleChange = (event) => {
 		this.setState({
 			[event.target.name]: event.target.value,

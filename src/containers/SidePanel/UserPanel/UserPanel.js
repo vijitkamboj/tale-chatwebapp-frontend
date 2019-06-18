@@ -3,6 +3,8 @@ import firebase from "../../../firebase"
 import logo from "../logo.png"
 import "./UserPanel.css";
 import {Dropdown , Image} from "semantic-ui-react"
+import {connect} from "react-redux"
+import {changeRegisterStatus} from "../../../actions/index"
 
 
 class UserPanel extends Component {
@@ -62,5 +64,9 @@ class UserPanel extends Component {
     }
 }
 
-
-export default UserPanel;
+const mapStateToProps = (state) => {
+    return({
+        register_status:state.user.register_status
+    })
+}
+export default connect(mapStateToProps,{changeRegisterStatus})(UserPanel);

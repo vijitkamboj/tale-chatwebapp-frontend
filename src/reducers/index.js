@@ -19,10 +19,11 @@ const user_reducer = (state = initialUserState ,action) => {
             return({
                 currentUser : action.payload.currentUser,
                 isLoading:false,
+                register_status: null
             })
         case actionTypes.CHANGE_REGISTER_STATUS :
             return({
-                currentUser : action.payload.currentUser,
+                currentUser : null,
                 isLoading:false,
                 register_status:action.payload.register_status
             })

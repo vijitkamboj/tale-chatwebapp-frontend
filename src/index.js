@@ -38,18 +38,16 @@ class Root extends Component {
             }else {
                 if (this.props.register_status !== null) {
                     this.props.history.push("/login")
-                    this.props.clearUser();
                 }
                 if(this.props.register_status === null){
                     this.props.history.push("/home")
-                    this.props.clearUser();
+                    this.props.clearUser()
                 }
             }
         })
     } // automatically routing the user to chat  console on refreshing if user is already logged in 
 
     render(){
-        console.log("index")
         document.body.className = 'none';
         return this.props.isLoading ? <LoadingScreen /> : (
             <Switch>

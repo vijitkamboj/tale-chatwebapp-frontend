@@ -18,11 +18,10 @@ export const clearUser = (value) => {
     })
 }
 
-export const changeRegisterStatus = (user,value) => {
+export const changeRegisterStatus = (value) => {
     return ({
         type: actionTypes.CHANGE_REGISTER_STATUS,
         payload: {
-            currentUser:user,
             register_status:value
         }
     })
