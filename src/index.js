@@ -20,7 +20,7 @@ import firebase from './firebase';
 import {createStore} from 'redux';
 import {Provider ,connect} from 'react-redux';
 import rootReducer from "./reducers";
-import {setUser,clearUser,changeRegisterStatus} from "./actions/index"
+import {setUser,clearUser} from "./actions/index"
 
 const store = createStore( rootReducer , composeWithDevTools()) //created store for global state
 
@@ -63,7 +63,7 @@ class Root extends Component {
 const mapStateToProps = (state) => ({isLoading:state.user.isLoading , register_status:state.user.register_status}) 
 
 
-const RootWithAuth = withRouter(connect( mapStateToProps ,{setUser,clearUser,changeRegisterStatus})(Root));  //connect (mapStateToProps , mapDispatchToProps)
+const RootWithAuth = withRouter(connect( mapStateToProps ,{setUser,clearUser})(Root));  //connect (mapStateToProps , mapDispatchToProps)
 // higher order component and pass isLoading state and setUser method as props to Root Componenet
 
 ReactDOM.render(<Provider store = {store}><Router><RootWithAuth /></Router></Provider>, document.getElementById('root'));

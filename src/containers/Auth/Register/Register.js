@@ -4,8 +4,6 @@ import firebase from '../../../firebase'
 import './Register.css';
 import { Button,Message } from 'semantic-ui-react';
 import md5 from 'md5';
-import {changeRegisterStatus} from "../../../actions/index";
-import {connect} from "react-redux"
 
 import Logo from '../Logo';
 
@@ -261,10 +259,5 @@ class register extends Component {
 	}
 }
 
-const mapStateToProps =(state)=>{
-	return({
-		register_status:state.user.register_status
-	})
-}
 
-export default connect(mapStateToProps,{changeRegisterStatus})(register);
+export default register;

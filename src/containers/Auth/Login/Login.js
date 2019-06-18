@@ -6,8 +6,6 @@ import firebase from '../../../firebase'
 import { Button,Message } from 'semantic-ui-react';
 import Logo from '../Logo';
 
-import {changeRegisterStatus} from "../../../actions/index";
-import {connect} from "react-redux"
 
 class login extends Component {
 	constructor(){
@@ -171,10 +169,6 @@ class login extends Component {
 	}
 }
 
-const mapStateToProps =(state)=>{
-	return({
-		register_status:state.user.register_status
-	})
-}
 
-export default connect(mapStateToProps,{changeRegisterStatus})(login);
+
+export default login;

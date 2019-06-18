@@ -7,7 +7,6 @@ import MessagePanel from "../MessagePanel/MessagePanel"
 import MetaPanel from "../MetaPanel/MetaPanel"
 
 import {connect} from "react-redux"
-import {changeRegisterStatus} from "../../actions/index"
 
 class App extends Component {
 
@@ -37,4 +36,4 @@ const mapStateToProps = ({user}) => {
     })
 }
 
-export default connect(mapStateToProps,{changeRegisterStatus})(App);
+export default connect(mapStateToProps)(App);

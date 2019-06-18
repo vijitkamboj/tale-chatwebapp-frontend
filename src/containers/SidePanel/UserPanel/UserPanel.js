@@ -4,7 +4,7 @@ import logo from "../logo.png"
 import "./UserPanel.css";
 import {Dropdown , Image} from "semantic-ui-react"
 import {connect} from "react-redux"
-import {changeRegisterStatus,clearUser,setUser} from "../../../actions/index"
+import {setUser} from "../../../actions/index"
 
 
 class UserPanel extends Component {
@@ -65,9 +65,4 @@ class UserPanel extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return({
-        register_status:state.user.register_status
-    })
-}
-export default connect(mapStateToProps,{changeRegisterStatus,clearUser,setUser})(UserPanel);
+export default connect(null,{setUser})(UserPanel);
