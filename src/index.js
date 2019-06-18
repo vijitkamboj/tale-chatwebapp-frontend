@@ -32,9 +32,9 @@ class Root extends Component {
         firebase.auth().onAuthStateChanged(currentUser => {
             if (currentUser ) {
                 setTimeout(() => {
-                    this.props.setUser(currentUser)
+                    this.props.setUser(currentUser,"set")
                     this.props.history.push("/app")
-                }, 2000)
+                }, 1500)
             }else {
                 if (this.props.register_status !== null) {
                     this.props.history.push("/login")

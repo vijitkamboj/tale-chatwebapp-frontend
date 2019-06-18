@@ -1,15 +1,16 @@
 import * as actionTypes from "./types";
 
-export const setUser = (user) => {
+export const setUser = (user,status) => {
     return ({
         type: actionTypes.SET_USER,
         payload: {
-            currentUser: user
+            currentUser: user,
+            register_status:status
         }
     })
 }// used to change the current user state
 
-export const clearUser = (value) => {
+export const clearUser = () => {
     return({
         type: actionTypes.CLEAR_USER,
         payload: {
@@ -18,10 +19,11 @@ export const clearUser = (value) => {
     })
 }
 
-export const changeRegisterStatus = (value) => {
+export const changeRegisterStatus = (user,value) => {
     return ({
         type: actionTypes.CHANGE_REGISTER_STATUS,
         payload: {
+            currentUser:user,
             register_status:value
         }
     })

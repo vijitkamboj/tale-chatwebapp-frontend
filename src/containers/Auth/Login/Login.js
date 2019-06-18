@@ -27,8 +27,10 @@ class login extends Component {
 		})
 	} // method to handle change in the feilds
 
+
 	handleSubmit = (event) => {
-        event.preventDefault();
+		event.preventDefault();
+		
         if (this.isFormValid){
 
             this.setState({

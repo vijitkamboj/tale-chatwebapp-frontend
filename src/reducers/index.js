@@ -13,7 +13,7 @@ const user_reducer = (state = initialUserState ,action) => {
             return({
                 currentUser : action.payload.currentUser,
                 isLoading:false,
-                register_status:"registered"
+                register_status: action.payload.status
             })
         case actionTypes.CLEAR_USER :
             return({
@@ -23,7 +23,7 @@ const user_reducer = (state = initialUserState ,action) => {
             })
         case actionTypes.CHANGE_REGISTER_STATUS :
             return({
-                currentUser : null,
+                currentUser : action.payload.currentUser,
                 isLoading:false,
                 register_status:action.payload.register_status
             })
