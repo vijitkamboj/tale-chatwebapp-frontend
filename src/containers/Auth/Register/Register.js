@@ -36,6 +36,7 @@ class register extends Component {
 
 	componentWillUnmount(){
 		firebase.auth().signOut();
+		
 	} // signing out user beacuase user is going automatically signed in once it is registered (resulting in issues on user profile update)
 	// executes when another component mounts 
 
@@ -50,8 +51,7 @@ class register extends Component {
 
 			firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password) // registering user && also automatically signin user
 				.then(createdUser => {
-
-					this.props.changeRegisterStatus("registered")
+					
 
 					this.setState({
 						loading:false,
@@ -77,6 +77,7 @@ class register extends Component {
 						errors: this.state.errors.concat(err),
 						loading: false
 					}) // stop loading and concat registration errors
+					this.props.changeRegisterStatus(null,null)
 				})
 		}
 	} // method to handle the submit event
@@ -139,7 +140,6 @@ class register extends Component {
 
 
 	render(){
-		console.log("register")
 		document.body.className = 'reg-back'; // change the background when routed to register component
 
 		const {

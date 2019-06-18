@@ -1,12 +1,13 @@
 import React,{Component} from 'react';
 import './App.css';
-import {connect} from "react-redux"
+
 import ColorPanel from "../ColorPanel/ColorPanel"
 import SidePanel from "../SidePanel/SidePanel"
 import MessagePanel from "../MessagePanel/MessagePanel"
 import MetaPanel from "../MetaPanel/MetaPanel"
-// import {Grid} from "semantic-ui-react"
 
+import {connect} from "react-redux"
+import {changeRegisterStatus} from "../../actions/index"
 
 class App extends Component {
 
@@ -14,10 +15,9 @@ class App extends Component {
         if(!this.props.currentUser){
             this.props.history.go(0)
         }
-    }
+    } 
     
     render(){
-        console.log("app");
         document.body.className = "app-body"
             return(
                 <div id="app">
@@ -32,8 +32,9 @@ class App extends Component {
 }
 const mapStateToProps = ({user}) => {
     return({
-        currentUser: user.currentUser
+        currentUser: user.currentUser,
+        register_status:user.register_status
     })
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps,{changeRegisterStatus})(App);

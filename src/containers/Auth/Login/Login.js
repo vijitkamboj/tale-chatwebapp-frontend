@@ -1,9 +1,13 @@
 import React,{ Component } from 'react';
 import {Link} from 'react-router-dom'
-import firebase from '../../../firebase'
-import { Button,Message } from 'semantic-ui-react';
 
+import firebase from '../../../firebase'
+
+import { Button,Message } from 'semantic-ui-react';
 import Logo from '../Logo';
+
+import {changeRegisterStatus} from "../../../actions/index";
+import {connect} from "react-redux"
 
 class login extends Component {
 	constructor(){
@@ -14,6 +18,10 @@ class login extends Component {
 			errors: [],
 			loading:false,
 		}  // defining state for login form
+	}
+
+	componentDidMount(){
+		this.props.changeRegisterStatus(null,null)
 	}
 
 	handleChange = (event) => {
@@ -75,7 +83,6 @@ class login extends Component {
 	} // checks if ENTER key is pressed
 
 	render(){
-		console.log("Login");
 		document.body.className = 'reg-back'; // change the background when routed to login component
 
 		const {
@@ -166,5 +173,10 @@ class login extends Component {
 	}
 }
 
+const mapStateToProps =(state)=>{
+	return({
+		register_status:state.user.register_status
+	})
+}
 
-export default login;
+export default connect(mapStateToProps,{changeRegisterStatus})(login);

@@ -10,20 +10,21 @@ const initialUserState ={
 const user_reducer = (state = initialUserState ,action) => {
     switch (action.type) {
         case actionTypes.SET_USER:
-                return({
-                    currentUser : action.payload.currentUser,
-                    isLoading:false,
-                    register_status:false
-                })
+            return({
+                currentUser : action.payload.currentUser,
+                isLoading:false,
+                register_status:"registered"
+            })
         case actionTypes.CLEAR_USER :
             return({
                 currentUser : action.payload.currentUser,
                 isLoading:false,
-                register_status:false
             })
         case actionTypes.CHANGE_REGISTER_STATUS :
             return({
-                register_status:action.payload
+                currentUser : action.payload.currentUser,
+                isLoading:false,
+                register_status:action.payload.register_status
             })
         default:
             return state;

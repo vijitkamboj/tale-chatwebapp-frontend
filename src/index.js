@@ -39,9 +39,8 @@ class Root extends Component {
                 if (this.props.register_status !== null) {
                     this.props.history.push("/login")
                     this.props.clearUser();
-                    this.props.changeRegisterStatus(null)
-                } 
-                if(this.props.register_status === null) {
+                }
+                if(this.props.register_status === null){
                     this.props.history.push("/home")
                     this.props.clearUser();
                 }
