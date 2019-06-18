@@ -13,7 +13,7 @@ const user_reducer = (state = initialUserState ,action) => {
             return({
                 currentUser : action.payload.currentUser,
                 isLoading:false,
-                register_status: action.payload.status
+                register_status: action.payload.register_status
             })
         case actionTypes.CLEAR_USER :
             return({

@@ -4,13 +4,13 @@ import logo from "../logo.png"
 import "./UserPanel.css";
 import {Dropdown , Image} from "semantic-ui-react"
 import {connect} from "react-redux"
-import {changeRegisterStatus,clearUser} from "../../../actions/index"
+import {changeRegisterStatus,clearUser,setUser} from "../../../actions/index"
 
 
 class UserPanel extends Component {
 
     handleSignOut = () => {
-        this.props.changeRegisterStatus(this.props.currentUser,null)
+        this.props.setUser(this.props.currentUser,null)
         firebase.auth().signOut()
     }
     dropDownOptions =()=>{
@@ -70,4 +70,4 @@ const mapStateToProps = (state) => {
         register_status:state.user.register_status
     })
 }
-export default connect(mapStateToProps,{changeRegisterStatus,clearUser})(UserPanel);
+export default connect(mapStateToProps,{changeRegisterStatus,clearUser,setUser})(UserPanel);
