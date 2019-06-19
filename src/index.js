@@ -32,7 +32,7 @@ class Root extends Component {
                 setTimeout(() => {
                     this.props.setUser(currentUser,"set")
                     this.props.history.push("/app")
-                }, 1500)
+                }, 0)
             }else {
                 if (this.props.register_status !== null) {
                     this.props.history.push("/login")

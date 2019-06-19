@@ -17,12 +17,6 @@
 }
 .icon#close:hover{
     cursor: pointer;
+    color: rgb(226, 226, 226)
 }
 
-#modal-header{
-    background-color: transparent;
-    font-weight: lighter;
-}
-/* #modal-content{
-    background-color: transparent;
-} */
