@@ -11,7 +11,8 @@
     box-sizing: content-box;
     color: white;
     font-weight: lighter;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    border-radius: 5px
 }
 #user-panel-dropdown{
     font-size:16px;

@@ -27,8 +27,9 @@ class Channels extends Component{
                     Channels ({channels.length})
                     <Icon name="add" size="large" className="icon" id="add" onClick={showModal}/>
                 </div>
-                <Modal dimmer={"blurring"} open={modal} closeIcon onClose={closeModal}>
-                    
+                <Modal dimmer={"blurring"} open={modal} closeIcon onClose={closeModal} >
+                    <Modal.Header id="modal-header">Add a channel</Modal.Header>
+                    <Modal.Content id="modal-content">asdada</Modal.Content>
                 </Modal>
             </React.Fragment>
         )
