@@ -23,7 +23,7 @@ class App extends Component {
                 <div id="app">
                     <ColorPanel />
                     <SidePanel currentUser={this.props.currentUser}/>
-                    <MessagePanel />
+                    <MessagePanel />  
                     <MetaPanel />
                 </div>
             )

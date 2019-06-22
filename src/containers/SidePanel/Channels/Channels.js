@@ -1,19 +1,60 @@
 import "./Channels.css"
 import React, { Component } from 'react';
-import {Icon, Modal,Input , Button} from "semantic-ui-react"
+import {Icon, Modal,Input , Button} from "semantic-ui-react";
+import firebase from "../../../firebase"
 
 class Channels extends Component{
 
     state = {
         channels:[],
         modal:false,
-        channelName:'',
-        channelDetail:""
+        channelName:"",
+        channelDetail:"",
+        isFormEmpty:true,
+        channelsRef : firebase.database().ref("channels"),
     }
 
-    handleChange =(event) => {
+    handleSubmit = (event) => {
+        event.preventDefault();
+        if (!this.state.isFormEmpty){
+            this.addChannel(this.state)
+        }else{
+            console.log(this.state.isFormEmpty);
+        }
+    }
+
+    addChannel = ({channelDetail,channelName,channelsRef}) => {
+        const { displayName , photoURL} = this.props.currentUser
+        const key = channelsRef.push().key
+        const newChannel = {
+            id: key,
+            name : channelName,
+            detail: channelDetail,
+            createdBy : {
+                name : displayName,
+                avatar : photoURL
+            }
+        }
+
+        channelsRef
+            .child(key)
+            .update(newChannel)
+            .then(() => {
+                this.setState({
+                    channelName: "",
+                    channelDetail: "",
+                    isFormEmpty:true 
+                });
+                this.closeModal();
+            })
+        .catch(err => alert(err))
+    }
+
+
+    handleChange = (event) => {
         this.setState({
-            [event.target.name] : event.target.value
+            [event.target.name]: event.target.value,
+            isFormEmpty: this.state.channelDetail && this.state.channelName !== "" ? false : true
         })
     }
 
@@ -25,8 +66,14 @@ class Channels extends Component{
         this.setState({modal:false})
     }
 
+    handleEnter = (event) => {
+        if (event.keyCode === 13){
+            this.handleSubmit(event)
+        }
+    }
+
     render(){
-        const {channels ,modal} = this.state;
+        const {channels ,modal , isFormEmpty} = this.state;
         const{showModal , closeModal} =this
         return(
             <React.Fragment>
@@ -37,7 +84,7 @@ class Channels extends Component{
                     <Icon name="add" size="large" className="icon" id="add" onClick={showModal}/>
                 </div>
 
-                <Modal basic dimmer={"blurring"} open={modal} closeIcon onClose={closeModal} >
+                <Modal basic dimmer={"blurring"} open={modal} closeIcon onClose={closeModal} onKeyDown={this.handleEnter}>
 
                     <Modal.Header 
                     icon="add" 
@@ -53,22 +100,42 @@ class Channels extends Component{
                         label="Name of the Channel"
                         name="channelName"
                         onChange={this.handleChange}
-                        style={{marginBottom:"10px"}}
+                        style={{marginBottom:"10px" , fontWeight:"lighter"}}
                         />
 
                         <Input 
                         fluid 
                         type="text"
                         label="About the Channel"
-                        name="channelDetails"
+                        name="channelDetail"
                         onChange={this.handleChange}
                         />
 
                     </Modal.Content>
 
                     <Modal.Actions style={{border:"none"}}>
-                        <Button color="green" basic inverted><Icon name="checkmark"/>Add</Button>
-                        <Button color="red" basic inverted onClick={this.closeModal}><Icon name="remove" />Cancel</Button>
+                    
+                        <Button 
+                        color="green" 
+                        basic 
+                        inverted 
+                        onClick={this.handleSubmit} 
+                        disabled={isFormEmpty}
+                        >
+                            <Icon name="checkmark"/>
+                            Add
+                        </Button>
+
+                        <Button 
+                        color="red" 
+                        basic 
+                        inverted 
+                        onClick={this.closeModal}
+                        >
+                            <Icon name="remove" />
+                            Cancel
+                        </Button>
+
                     </Modal.Actions>
                 </Modal>
 

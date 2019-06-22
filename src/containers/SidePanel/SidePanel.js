@@ -9,7 +9,7 @@ class SidePanel extends Component{
         return(
             <div id="side-panel" className="panels">
                 <UserPanel currentUser = {this.props.currentUser}/>
-                <Channels />
+                <Channels currentUser = {this.props.currentUser}/>
             </div>
         )
     }
