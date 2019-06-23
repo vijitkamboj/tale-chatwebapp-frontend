@@ -19,9 +19,8 @@ class register extends Component {
 			passwordConfirmation:'',
 			errors: [],
 			loading:false,
-			userFire : firebase.firestore(),
-			userRef: firebase.database().ref('users'),
-			status:"Register"
+			status:"Register",
+			userRef: firebase.database().ref('users')
 		}  // defining state for registration form
 	}
 
@@ -32,11 +31,10 @@ class register extends Component {
 		}) // clering errors and store event value
 	} // method to handle change in the feilds
 
-
 	componentWillUnmount(){
 		firebase.auth().signOut();
 		
-	} // signing out user beacuase user is going automatically signed in once it is registered (resulting in issues on user profile update)
+	} // signing out user beacuase user is going o automatically signed in once it is registered (resulting in issues while loading the user in global state)
 	// executes when another component mounts 
 	// re-unmouting happens when history.push is encountered
 
@@ -49,16 +47,15 @@ class register extends Component {
 				errors: []
 			}) // starting loading and clearing previous errors
 
-			firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password) // registering user && also automatically signin user
+			firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password) // registering user && also automatically signining in user
 				.then(createdUser => {
 					
-
 					this.setState({
 						loading:false,
 						status:"Registered Successully",
 						password:'',
 						passwordConfirmation:''
-					})
+					}) // stop loading changing the status and clearing out password related fields
 					
 					createdUser.user.updateProfile({
 							displayName: this.state.username,
@@ -77,7 +74,6 @@ class register extends Component {
 						errors: this.state.errors.concat(err),
 						loading: false
 					}) // stop loading and concat registration errors
-					this.props.changeRegisterStatus(null,null)
 				})
 		}
 	} // method to handle the submit event
@@ -89,7 +85,7 @@ class register extends Component {
 					avatar: createdUser.user.photoURL
 				})
 			)
-	}// saving extra info about users in database
+	}// saving extra info about users in realtime database
 
 
 	isFormValid = () => {

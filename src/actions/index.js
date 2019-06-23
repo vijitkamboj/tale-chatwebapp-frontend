@@ -17,6 +17,6 @@ export const clearUser = () => {
             currentUser: null,
         }
     })
-}
+} // used to clear the current user when signout
 
 

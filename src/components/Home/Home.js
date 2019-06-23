@@ -11,7 +11,7 @@ class Home extends Component {
 		return(
 			<div className="home">
 				<Nav />
-				<div id="home-cover"></div>
+				<div id="home-cover"></div> 
 				<div id="home-intro"></div>
 			</div>
 		)

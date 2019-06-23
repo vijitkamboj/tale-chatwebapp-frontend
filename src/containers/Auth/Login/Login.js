@@ -15,7 +15,7 @@ class login extends Component {
 			password:'',
 			errors: [],
 			loading:false,
-		}  // defining state for login form
+		}  // defining local state for login form
 	}
 
 
@@ -35,7 +35,7 @@ class login extends Component {
             this.setState({
                 loading: true,
                 error: []
-            })
+            }) // changing loading to true and emptying the error field
 
             firebase
                 .auth()
@@ -45,7 +45,7 @@ class login extends Component {
                         loading:false,
                         errors : this.state.errors.concat(err)
                     })
-                })
+                }) // signingIn the user
         }
 	} // method to handle the submit event
 

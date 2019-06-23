@@ -12,7 +12,8 @@ class UserPanel extends Component {
     handleSignOut = () => {
         this.props.setUser(this.props.currentUser,null)
         firebase.auth().signOut()
-    }
+    }// changing the global status register_status to null only when signed out using signout option in dropdown so that user can redirected to home reather than login page
+
     dropDownOptions =()=>{
     
       return(

@@ -14,7 +14,7 @@ class App extends Component {
         if(!this.props.currentUser){
             this.props.history.go(0)
         }
-    } 
+    } // before the component is mounted , making sure that there is signedIn user , if not refresh the page so that it redirects to home
 
     
     render(){
@@ -28,13 +28,12 @@ class App extends Component {
                 </div>
             )
        
-    }
+    } // rendering the chat console component
 }
 const mapStateToProps = ({user}) => {
     return({
-        currentUser: user.currentUser,
-        register_status:user.register_status
+        currentUser: user.currentUser
     })
-}
+} // providing global state to the component
 
 export default connect(mapStateToProps)(App);

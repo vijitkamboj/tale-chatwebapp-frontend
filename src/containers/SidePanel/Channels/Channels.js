@@ -12,14 +12,45 @@ class Channels extends Component{
         channelDetail:"",
         isFormEmpty:true,
         channelsRef : firebase.database().ref("channels"),
-    }
+    } // defining local state for channel compoenent
+
+    componentDidMount(){
+        console.log("mounted");
+        this.addListeners()
+    } // binding listeteners to the component when mounted
+
+    addListeners = () => {
+        let loadedChannels = [];
+        this.state.channelsRef.on("child_added" , snap=>{loadedChannels.push(snap.val())})
+        console.log("changed_state");
+        this.setState({channels:loadedChannels})
+    } // method to add listeners
+
+    displayChannels = () => {
+        console.log(this.state.channels.length);
+        this.state.channels.length > 0 && 
+        this.state.channels.map((channel,i)=> {
+            return(
+                <div 
+                key = {i}
+                style={{
+                    marginLeft:"20px",
+                    marginTop: "30px",
+                    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+                    fontWeight: "lighter",
+                    fontSize: "16px",
+                    color:"white"
+                }}>
+                    {i + ". "}{channel.name}
+                </div>
+            )
+        })
+    } // methods that generates div containg channel name
 
     handleSubmit = (event) => {
         event.preventDefault();
-        if (!this.state.isFormEmpty){
+        if (!this.state.isFormEmpty){   
             this.addChannel(this.state)
-        }else{
-            console.log(this.state.isFormEmpty);
         }
     }
 
@@ -50,11 +81,10 @@ class Channels extends Component{
         .catch(err => alert(err))
     }
 
-
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value,
-            isFormEmpty: this.state.channelDetail && this.state.channelName !== "" ? false : true
+            isFormEmpty: this.state.channelDetail !== "" && this.state.channelName !== "" ? false : true
         })
     }
 
@@ -82,6 +112,9 @@ class Channels extends Component{
                     <Icon name="exchange" size="large" style={{marginRight:"10px"}} />
                     Channels ({channels.length})
                     <Icon name="add" size="large" className="icon" id="add" onClick={showModal}/>
+                </div>
+                <div id="user-panel-channel-display">
+                    {this.displayChannels()}
                 </div>
 
                 <Modal basic dimmer={"blurring"} open={modal} closeIcon onClose={closeModal} onKeyDown={this.handleEnter}>

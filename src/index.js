@@ -32,18 +32,18 @@ class Root extends Component {
                 setTimeout(() => {
                     this.props.setUser(currentUser,"set")
                     this.props.history.push("/app")
-                }, 0)
+                }, 0) // store user in global state and redirect user to chat console
             }else {
                 if (this.props.register_status !== null) {
-                    this.props.history.push("/login")
+                    this.props.history.push("/login")   // redirects user to login page if there is no currently signed in user and user has just registered
                 }
                 if(this.props.register_status === null){
                     this.props.history.push("/home")
-                    this.props.clearUser()
+                    this.props.clearUser() // redirects user to home page if there is no currently signed in user
                 }
             }
         })
-    } // automatically routing the user to chat  console on refreshing if user is already logged in 
+    } // automatically routing the user to chat console on refreshing if user is already logged in 
 
     render(){
         document.body.className = 'none';
