@@ -14,45 +14,54 @@ class Channels extends Component{
         channelsRef : firebase.database().ref("channels"),
     } // defining local state for channel compoenent
 
+
     componentDidMount(){
-        console.log("mounted");
         this.addListeners()
-    } // binding listeteners to the component when mounted
+    }  // adding database listeners when component mounts
 
     addListeners = () => {
         let loadedChannels = [];
-        this.state.channelsRef.on("child_added" , snap=>{loadedChannels.push(snap.val())})
-        console.log("changed_state");
-        this.setState({channels:loadedChannels})
-    } // method to add listeners
+        this.state.channelsRef.on("child_added", snap => {
+            loadedChannels.push(snap.val())
+            this.setState({channels:loadedChannels})
+        }) 
+    }// whenever a child is added it returns dataSnapshot of all children and also executes first time when child_added event hasn't happened.
 
-    displayChannels = () => {
-        console.log(this.state.channels.length);
-        this.state.channels.length > 0 && 
-        this.state.channels.map((channel,i)=> {
-            return(
-                <div 
-                key = {i}
-                style={{
-                    marginLeft:"20px",
-                    marginTop: "30px",
-                    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-                    fontWeight: "lighter",
-                    fontSize: "16px",
-                    color:"white"
-                }}>
-                    {i + ". "}{channel.name}
-                </div>
-            )
-        })
-    } // methods that generates div containg channel name
+
+    displayChannels = (channels) => {
+        return(
+            <React.Fragment>
+                {channels.length>0 && channels.map((channel,i)=> {
+                    return(    
+                        <li key={channel.id} id="user-panel-channels-item" style={{marginTop: "10px"}}>
+                        <span
+                            name = {channel.name}
+                            style={{
+                                marginLeft:"5px",
+                                fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+                                fontWeight:"lighter",
+                                fontSize: "16px",
+                                color:"white"
+
+                            }}
+                            onClick={()=>{console.log(channel)}}>
+                            {channel.name}
+                        </span>
+                        </li>
+                    )
+                })
+                }
+            </React.Fragment>  // wrapping multiple list items inside react.fragment 
+        )
+
+    } // methods that generates list elements of channel name
 
     handleSubmit = (event) => {
         event.preventDefault();
         if (!this.state.isFormEmpty){   
             this.addChannel(this.state)
         }
-    }
+    } // method to handle submit event
 
     addChannel = ({channelDetail,channelName,channelsRef}) => {
         const { displayName , photoURL} = this.props.currentUser
@@ -66,6 +75,7 @@ class Channels extends Component{
                 avatar : photoURL
             }
         }
+        this.closeModal();
 
         channelsRef
             .child(key)
@@ -76,31 +86,31 @@ class Channels extends Component{
                     channelDetail: "",
                     isFormEmpty:true 
                 });
-                this.closeModal();
+                
             })
         .catch(err => alert(err))
-    }
+    } // method used to store channel into the database
 
     handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value,
             isFormEmpty: this.state.channelDetail !== "" && this.state.channelName !== "" ? false : true
         })
-    }
+    } // method to handle changes in the input field and constantle updating isFormEmpty state
 
     showModal = () => {
         this.setState({modal:true})
-    }
-
+    } // method to show modal
+ 
     closeModal = () => {
         this.setState({modal:false})
-    }
+    } // methos to close the modal
 
     handleEnter = (event) => {
         if (event.keyCode === 13){
             this.handleSubmit(event)
         }
-    }
+    } // method to check if enter is pressed
 
     render(){
         const {channels ,modal , isFormEmpty} = this.state;
@@ -109,31 +119,53 @@ class Channels extends Component{
             <React.Fragment>
 
                 <div id="user-panel-channels" >
-                    <Icon name="exchange" size="large" style={{marginRight:"10px"}} />
+
+                    <Icon 
+                    name="exchange" 
+                    size="large" 
+                    style={{marginRight:"10px"}}
+                     />
+
                     Channels ({channels.length})
-                    <Icon name="add" size="large" className="icon" id="add" onClick={showModal}/>
-                </div>
-                <div id="user-panel-channel-display">
-                    {this.displayChannels()}
-                </div>
+
+                    <Icon 
+                    name="add" 
+                    size="large" 
+                    className="icon" 
+                    id="add"
+                    onClick={showModal}
+
+                    />
+
+                </div> 
+                {/* displaying channel heading */}
+                
+                <ul style={{fontSize:"16px",color:"black",paddingLeft:"50px",marginTop:"0px"}}>
+                    {this.displayChannels(channels)}
+                </ul>
+                {/* displaying channels */}
 
                 <Modal basic dimmer={"blurring"} open={modal} closeIcon onClose={closeModal} onKeyDown={this.handleEnter}>
 
                     <Modal.Header 
                     icon="add" 
-                    style={{border:"none",fontWeight:"lighter",color: "rgb(226, 226, 226)"}}
+                    style={{
+                        border:"none",
+                        fontWeight:"lighter",
+                        color: "rgb(226, 226, 226)"
+                    }}
                     >
                         Add a channel
                     </Modal.Header>
 
-                    <Modal.Content style={{border:"none"}}>
+                    <Modal.Content style={{border:"none",fontWeight:"lighter"}}>
 
                         <Input 
                         fluid 
                         label="Name of the Channel"
                         name="channelName"
                         onChange={this.handleChange}
-                        style={{marginBottom:"10px" , fontWeight:"lighter"}}
+                        style={{marginBottom:"10px"}}
                         />
 
                         <Input 
