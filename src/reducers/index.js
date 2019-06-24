@@ -6,7 +6,7 @@ const initialUserState ={
     isLoading:true,
     register_status:null
 }
-
+// by defualt loading is ture 
 const user_reducer = (state = initialUserState ,action) => {
     switch (action.type) {
         case actionTypes.SET_USER:
@@ -24,7 +24,7 @@ const user_reducer = (state = initialUserState ,action) => {
         default:
             return state;
     }
-}// generates states in the store
+}// generates states in the store according to the action 
 
 const rootReducer = combineReducers({
     user : user_reducer

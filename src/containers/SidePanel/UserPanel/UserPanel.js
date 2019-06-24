@@ -44,10 +44,13 @@ class UserPanel extends Component {
     render(){
         return(
             <div id="user-panel">
+                {/* displaying tale heading */}
                 <div id="user-panel-header">
                     <img src={logo} alt="logo" style={{height: "40px" , width:"auto" , margin:"10px"}}/>
                     Tale
                 </div>
+
+                {/* Dropdown */}
                 <Dropdown 
                 id="user-panel-dropdown" 
                 trigger={
@@ -59,6 +62,7 @@ class UserPanel extends Component {
                 options={this.dropDownOptions()}
                 pointing
                 />
+                
             </div>
             
         )

@@ -117,7 +117,7 @@ class Channels extends Component{
         const{showModal , closeModal} =this
         return(
             <React.Fragment>
-
+                {/* displaying channel heading */}
                 <div id="user-panel-channels" >
 
                     <Icon 
@@ -138,13 +138,13 @@ class Channels extends Component{
                     />
 
                 </div> 
-                {/* displaying channel heading */}
                 
+                {/* displaying channels */}
                 <ul style={{fontSize:"16px",color:"black",paddingLeft:"50px",marginTop:"0px"}}>
                     {this.displayChannels(channels)}
                 </ul>
-                {/* displaying channels */}
-
+                
+                {/* dispalying modal */}
                 <Modal basic dimmer={"blurring"} open={modal} closeIcon onClose={closeModal} onKeyDown={this.handleEnter}>
 
                     <Modal.Header 
