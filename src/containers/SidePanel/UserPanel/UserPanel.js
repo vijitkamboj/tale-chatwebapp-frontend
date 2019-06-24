@@ -43,6 +43,7 @@ class UserPanel extends Component {
 
     render(){
         return(
+            // USER PANEL
             <div id="user-panel">
                 {/* displaying tale heading */}
                 <div id="user-panel-header">
@@ -62,7 +63,7 @@ class UserPanel extends Component {
                 options={this.dropDownOptions()}
                 pointing
                 />
-                
+
             </div>
             
         )

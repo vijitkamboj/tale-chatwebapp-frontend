@@ -1,13 +1,16 @@
 #side-panel{
     display: flex;
     flex-direction: column;
+
     width:280px;
+    margin:12px 0px 12px 0px;
+    overflow-y: scroll;
+
     background-color : rgba(68, 79, 90);
     font-size: 5px;
     font-weight: lighter;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
     border-radius: 10px 0px 0px 10px;
-    margin:12px 0px 12px 0px;
     border-right:0px;
-    overflow-y: scroll
 }

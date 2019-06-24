@@ -38,6 +38,7 @@ class Channels extends Component{
                             name = {channel.name}
                             style={{
                                 marginLeft:"5px",
+
                                 fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
                                 fontWeight:"lighter",
                                 fontSize: "16px",
@@ -140,7 +141,12 @@ class Channels extends Component{
                 </div> 
                 
                 {/* displaying channels */}
-                <ul style={{fontSize:"16px",color:"rgba(255, 50, 50, 0.452)",paddingLeft:"50px",marginTop:"0px"}}>
+                <ul style={{
+                    fontSize:"16px",
+                    color:"rgba(255, 50, 50, 0.452)",
+                    paddingLeft:"50px",
+                    marginTop:"0px"
+                }}>
                     {this.displayChannels(channels)}
                 </ul>
                 
@@ -148,11 +154,12 @@ class Channels extends Component{
                 <Modal basic open={modal} closeIcon onClose={closeModal} onKeyDown={this.handleEnter}>
 
                     <Modal.Header 
-                    icon="add" 
-                    style={{
-                        border:"none",
-                        fontWeight:"lighter",
-                        color: "rgb(226, 226, 226)"
+                        icon="add" 
+                        style={{
+                            fontWeight:"lighter",
+                            color: "rgb(226, 226, 226)",
+
+                            border:"none",
                     }}
                     >
                         Add a channel
@@ -161,19 +168,19 @@ class Channels extends Component{
                     <Modal.Content style={{border:"none",fontWeight:"lighter"}}>
 
                         <Input 
-                        fluid 
-                        label="Name of the Channel"
-                        name="channelName"
-                        onChange={this.handleChange}
-                        style={{marginBottom:"10px"}}
+                            fluid 
+                            label="Name of the Channel"
+                            name="channelName"
+                            onChange={this.handleChange}
+                            style={{marginBottom:"10px"}}
                         />
 
                         <Input 
-                        fluid 
-                        type="text"
-                        label="About the Channel"
-                        name="channelDetail"
-                        onChange={this.handleChange}
+                            fluid 
+                            type="text"
+                            label="About the Channel"
+                            name="channelDetail"
+                            onChange={this.handleChange}
                         />
 
                     </Modal.Content>
@@ -181,21 +188,21 @@ class Channels extends Component{
                     <Modal.Actions style={{border:"none"}}>
                     
                         <Button 
-                        color="green" 
-                        basic 
-                        inverted 
-                        onClick={this.handleSubmit} 
-                        disabled={isFormEmpty}
+                            color="green" 
+                            basic 
+                            inverted 
+                            onClick={this.handleSubmit} 
+                            disabled={isFormEmpty}
                         >
                             <Icon name="checkmark"/>
                             Add
                         </Button>
 
                         <Button 
-                        color="red" 
-                        basic 
-                        inverted 
-                        onClick={this.closeModal}
+                            color="red" 
+                            basic 
+                            inverted 
+                            onClick={this.closeModal}
                         >
                             <Icon name="remove" />
                             Cancel
