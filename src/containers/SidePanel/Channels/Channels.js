@@ -24,9 +24,9 @@ class Channels extends Component{
         this.state.channelsRef.on("child_added", snap => {
             loadedChannels.push(snap.val())
             this.setState({channels:loadedChannels})
-        }) 
-    }// whenever a child is added it returns dataSnapshot of all children and also executes first time when child_added event hasn't happened.
+        })
 
+    }// whenever a child is added it returns dataSnapshot of all children and also executes first time when child_added event hasn't happened.
 
     displayChannels = (channels) => {
         return(
@@ -140,12 +140,12 @@ class Channels extends Component{
                 </div> 
                 
                 {/* displaying channels */}
-                <ul style={{fontSize:"16px",color:"black",paddingLeft:"50px",marginTop:"0px"}}>
+                <ul style={{fontSize:"16px",color:"rgba(255, 50, 50, 0.452)",paddingLeft:"50px",marginTop:"0px"}}>
                     {this.displayChannels(channels)}
                 </ul>
                 
                 {/* dispalying modal */}
-                <Modal basic dimmer={"blurring"} open={modal} closeIcon onClose={closeModal} onKeyDown={this.handleEnter}>
+                <Modal basic open={modal} closeIcon onClose={closeModal} onKeyDown={this.handleEnter}>
 
                     <Modal.Header 
                     icon="add" 

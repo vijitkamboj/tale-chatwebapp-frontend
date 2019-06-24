@@ -8,5 +8,6 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     border-radius: 10px 0px 0px 10px;
     margin:12px 0px 12px 0px;
-    border-right:0px
+    border-right:0px;
+    overflow-y: scroll
 }
