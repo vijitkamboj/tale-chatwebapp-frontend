@@ -1,7 +1,9 @@
 import "./Channels.css"
 import React, { Component } from 'react';
 import {Icon, Modal,Input , Button} from "semantic-ui-react";
-import firebase from "../../../firebase"
+import firebase from "../../../firebase";
+import {connect} from "react-redux";
+import { changeCurrentChannel } from "../../../actions/channels";
 
 class Channels extends Component{
 
@@ -33,7 +35,7 @@ class Channels extends Component{
             <React.Fragment>
                 {channels.length>0 && channels.map((channel,i)=> {
                     return(    
-                        <li key={channel.id} id="user-panel-channels-item" style={{marginTop: "10px"}}>
+                        <li key={channel.id} id="user-panel-channels-item" style={{marginTop: "10px"}} onClick={()=>this.props.changeCurrentChannel(channel)}>
                         <span
                             name = {channel.name}
                             style={{
@@ -216,4 +218,4 @@ class Channels extends Component{
     }
 }
 
-export default Channels ;
+export default connect(null,{changeCurrentChannel})(Channels) ;

@@ -5,6 +5,7 @@ import "./UserPanel.css";
 import {Dropdown , Image} from "semantic-ui-react"
 import {connect} from "react-redux"
 import {setUser} from "../../../actions/index"
+import {changeCurrentChannel} from "../../../actions/channels"
 
 
 class UserPanel extends Component {
@@ -12,6 +13,7 @@ class UserPanel extends Component {
     handleSignOut = () => {
         this.props.setUser(this.props.currentUser,null)
         firebase.auth().signOut()
+        this.props.changeCurrentChannel(null)
     }// changing the global status register_status to null only when signed out using signout option in dropdown so that user can redirected to home reather than login page
 
     dropDownOptions =()=>{
@@ -71,4 +73,4 @@ class UserPanel extends Component {
     }
 }
 
-export default connect(null,{setUser})(UserPanel);
+export default connect(null,{setUser,changeCurrentChannel})(UserPanel);
