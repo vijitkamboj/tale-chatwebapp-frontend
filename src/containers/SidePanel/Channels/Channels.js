@@ -43,6 +43,14 @@ class Channels extends Component{
         }
     }
 
+    handleChannelClick = (channel) => {
+        this.setState({
+            activeChannel: channel
+        })
+        this.props.changeCurrentChannel(channel)
+
+    }
+
     displayChannels = (channels) => {
         return(
             <React.Fragment>
@@ -50,23 +58,19 @@ class Channels extends Component{
                     return(    
                         <li 
                             key={channel.id}
+                            style={{marginTop: "10px",color:this.state.activeChannel === channel ? "white" : "rgba(0, 0, 0, 0.7)" }}
                             className="user-panel-channels-item" 
-                            style={{marginTop: "10px"}} 
-                            onClick={()=>this.props.changeCurrentChannel(channel)}
+                            onClick={()=>this.handleChannelClick(channel)}
                         >
                             <span
                                 name = {channel.name}
                                 style={{
-                                    padding: "0px 2.5px 1px 2.5px",
-                                    
                                     fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
                                     fontWeight:"lighter",
                                     fontSize: "16px",
                                     color:"white"
 
                                 }}
-                                onClick={()=>this.setState({activeChannel:channel})}
-                                className = {this.state.activeChannel === channel ? "user-panel-channels-list-item" : "" }
                             >
                                 {channel.name}
                             </span>
@@ -145,12 +149,6 @@ class Channels extends Component{
                 {/* displaying channel heading */}
                 <div id="user-panel-channels-header" >
 
-                    <Icon 
-                    name="exchange" 
-                    size="small" 
-                    style={{margin:"auto 0",marginRight:"10px", color:"black"}}
-                     />
-
                     Channels ({channels.length})
 
                     <Icon 
@@ -158,7 +156,7 @@ class Channels extends Component{
                     size="small"
                     className="icon" 
                     id="add"
-                    style={{margin:"auto 20px auto auto",color:"black"}}
+                    style={{margin:"auto 20px auto auto",color:"rgba(0, 0, 0, 0.7)"}}
                     onClick={showModal}
                     />
 
@@ -166,7 +164,6 @@ class Channels extends Component{
                 
                 {/* displaying channels */}
                 <ul style={{
-                    color:"rgba(255,153,153,0.8)",
                     fontSize:"16px",
                     paddingLeft:"50px",
                     marginTop:"0px"
@@ -182,7 +179,6 @@ class Channels extends Component{
                         style={{
                             fontWeight:"lighter",
                             color: "rgb(226, 226, 226)",
-
                             border:"none",
                         }}
                     >

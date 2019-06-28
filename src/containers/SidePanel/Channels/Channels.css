@@ -6,11 +6,7 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: normal;
     font-size: 16px;
-    color: black;
-}
-
-.user-panel-channels-list-item {
-    border-bottom: 1px solid rgba(255, 153, 153, 0.5)
+    color: white
 }
 
 .user-panel-channels-item:hover {
