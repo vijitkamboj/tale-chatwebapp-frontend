@@ -143,21 +143,22 @@ class Channels extends Component{
         return(
             <React.Fragment>
                 {/* displaying channel heading */}
-                <div id="user-panel-channels" >
+                <div id="user-panel-channels-header" >
 
                     <Icon 
                     name="exchange" 
-                    size="large" 
-                    style={{marginRight:"10px"}}
+                    size="small" 
+                    style={{margin:"auto 0",marginRight:"10px", color:"black"}}
                      />
 
                     Channels ({channels.length})
 
                     <Icon 
                     name="add" 
-                    size="large" 
+                    size="small"
                     className="icon" 
                     id="add"
+                    style={{margin:"auto 20px auto auto",color:"black"}}
                     onClick={showModal}
                     />
 
