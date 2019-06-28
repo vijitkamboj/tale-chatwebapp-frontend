@@ -20,18 +20,28 @@ class Channels extends Component{
 
 
     componentDidMount(){
-        this.addListeners()
+        this.addListeners();
     }  // adding database listeners when component mounts
 
+    componentWillUnmount(){
+        this.state.channelsRef.off("child_added")
+    } // removing the listeners before component unmounts
 
     addListeners = () => {
         let loadedChannels = [];
         this.state.channelsRef.on("child_added", snap => {
             loadedChannels.push(snap.val())
             this.setState({channels:loadedChannels})
-        })
+            this.setFirstChannel(this.state.channels)
+        });
 
     }// whenever a child is added it returns dataSnapshot of all children and also executes first time when child_added event hasn't happened.
+
+    setFirstChannel = (channels) => {
+        if(this.state.firstLoad === true && channels.length>0 ){
+            this.setState({activeChannel : channels[0],firstLoad:false})
+        }
+    }
 
     displayChannels = (channels) => {
         return(
@@ -39,15 +49,15 @@ class Channels extends Component{
                 {channels.length>0 && channels.map((channel,i)=> {
                     return(    
                         <li 
-                        key={channel.id}
-                        className="user-panel-channels-item" 
-                        style={{marginTop: "10px"}} 
-                        onClick={()=>this.props.changeCurrentChannel(channel)}
+                            key={channel.id}
+                            className="user-panel-channels-item" 
+                            style={{marginTop: "10px"}} 
+                            onClick={()=>this.props.changeCurrentChannel(channel)}
                         >
                             <span
                                 name = {channel.name}
                                 style={{
-                                    padding: "0px 5px 1px 5px",
+                                    padding: "0px 2.5px 1px 2.5px",
                                     
                                     fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
                                     fontWeight:"lighter",
@@ -77,15 +87,16 @@ class Channels extends Component{
     } // method to handle submit event
 
     addChannel = ({channelDetail,channelName,channelsRef}) => {
+
         const { displayName , photoURL} = this.props.currentUser
         const key = channelsRef.push().key
         const newChannel = {
             id: key,
-            name : channelName,
+            name: channelName,
             detail: channelDetail,
-            createdBy : {
-                name : displayName,
-                avatar : photoURL
+            createdBy: {
+                name: displayName,
+                avatar: photoURL
             }
         }
         this.closeModal();
@@ -97,11 +108,11 @@ class Channels extends Component{
                 this.setState({
                     channelName: "",
                     channelDetail: "",
-                    isFormEmpty:true 
+                    isFormEmpty: true
                 });
-                
+
             })
-        .catch(err => alert(err))
+            .catch(err => alert(err))
     } // method used to store channel into the database
 
     handleChange = (event) => {
@@ -109,7 +120,7 @@ class Channels extends Component{
             [event.target.name]: event.target.value,
             isFormEmpty: this.state.channelDetail !== "" && this.state.channelName !== "" ? false : true
         })
-    } // method to handle changes in the input field and constantle updating isFormEmpty state
+    } // method to handle changes in the input field and constantly updating isFormEmpty state
 
     showModal = () => {
         this.setState({modal:true})
@@ -126,8 +137,9 @@ class Channels extends Component{
     } // method to check if enter is pressed
 
     render(){
-        const {channels ,modal , isFormEmpty,activeChannel} = this.state;
-        const{showModal , closeModal} =this
+        const {channels ,modal , isFormEmpty} = this.state;
+        const{showModal , closeModal} =this;
+        
         return(
             <React.Fragment>
                 {/* displaying channel heading */}
@@ -171,7 +183,7 @@ class Channels extends Component{
                             color: "rgb(226, 226, 226)",
 
                             border:"none",
-                    }}
+                        }}
                     >
                         Add a channel
                     </Modal.Header>
