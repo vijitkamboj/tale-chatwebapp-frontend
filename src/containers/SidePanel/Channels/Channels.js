@@ -8,18 +8,21 @@ import { changeCurrentChannel } from "../../../actions/channels";
 class Channels extends Component{
 
     state = {
-        channels:[],
-        modal:false,
-        channelName:"",
-        channelDetail:"",
-        isFormEmpty:true,
-        channelsRef : firebase.database().ref("channels"),
+        channels: [],
+        modal: false,
+        channelName: "",
+        channelDetail: "",
+        isFormEmpty: true,
+        channelsRef: firebase.database().ref("channels"),
+        firstLoad: true,
+        activeChannel: ""
     } // defining local state for channel compoenent
 
 
     componentDidMount(){
         this.addListeners()
     }  // adding database listeners when component mounts
+
 
     addListeners = () => {
         let loadedChannels = [];
@@ -35,21 +38,28 @@ class Channels extends Component{
             <React.Fragment>
                 {channels.length>0 && channels.map((channel,i)=> {
                     return(    
-                        <li key={channel.id} id="user-panel-channels-item" style={{marginTop: "10px"}} onClick={()=>this.props.changeCurrentChannel(channel)}>
-                        <span
-                            name = {channel.name}
-                            style={{
-                                marginLeft:"5px",
+                        <li 
+                        key={channel.id}
+                        className="user-panel-channels-item" 
+                        style={{marginTop: "10px"}} 
+                        onClick={()=>this.props.changeCurrentChannel(channel)}
+                        >
+                            <span
+                                name = {channel.name}
+                                style={{
+                                    padding: "0px 5px 1px 5px",
+                                    
+                                    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+                                    fontWeight:"lighter",
+                                    fontSize: "16px",
+                                    color:"white"
 
-                                fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-                                fontWeight:"lighter",
-                                fontSize: "16px",
-                                color:"white"
-
-                            }}
-                            onClick={()=>{console.log(channel)}}>
-                            {channel.name}
-                        </span>
+                                }}
+                                onClick={()=>this.setState({activeChannel:channel})}
+                                className = {this.state.activeChannel === channel ? "user-panel-channels-list-item" : "" }
+                            >
+                                {channel.name}
+                            </span>
                         </li>
                     )
                 })
@@ -116,7 +126,7 @@ class Channels extends Component{
     } // method to check if enter is pressed
 
     render(){
-        const {channels ,modal , isFormEmpty} = this.state;
+        const {channels ,modal , isFormEmpty,activeChannel} = this.state;
         const{showModal , closeModal} =this
         return(
             <React.Fragment>
@@ -137,15 +147,14 @@ class Channels extends Component{
                     className="icon" 
                     id="add"
                     onClick={showModal}
-
                     />
 
                 </div> 
                 
                 {/* displaying channels */}
                 <ul style={{
+                    color:"rgba(255,153,153,0.8)",
                     fontSize:"16px",
-                    color:"rgba(255, 50, 50, 0.452)",
                     paddingLeft:"50px",
                     marginTop:"0px"
                 }}>
