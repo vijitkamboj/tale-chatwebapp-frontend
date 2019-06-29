@@ -128,11 +128,11 @@ class Channels extends Component{
     } // method to handle changes in the input field and constantly updating isFormEmpty state
 
     showModal = () => {
-        this.setState({modal:true})
+        this.setState({modal:true,isFormEmpty:true,channelName: "",channelDetail: "",})
     } // method to show modal
  
     closeModal = () => {
-        this.setState({modal:false})
+        this.setState({modal:false })
     } // methos to close the modal
 
     handleEnter = (event) => {
