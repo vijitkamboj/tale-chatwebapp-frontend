@@ -37,6 +37,7 @@ class Channels extends Component{
 
     }// whenever a child is added it returns dataSnapshot of all children and also executes first time when child_added event hasn't happened.
 
+
     setFirstChannel = (channels) => {
         if(this.state.firstLoad === true && channels.length>0 ){
             this.setState({activeChannel : channels[0],firstLoad:false})
@@ -148,6 +149,7 @@ class Channels extends Component{
             <React.Fragment>
                 {/* displaying channel heading */}
                 <div id="user-panel-channels-header" >
+                <Icon name="circle" size="small" style={{margin:"auto 10px auto 0",color:"rgba(255,153,153)"}} />
 
                     Channels ({channels.length})
 
@@ -165,7 +167,7 @@ class Channels extends Component{
                 {/* displaying channels */}
                 <ul style={{
                     fontSize:"16px",
-                    paddingLeft:"50px",
+                    paddingLeft:"55px",
                     marginTop:"0px"
                 }}>
                     {this.displayChannels(channels)}
