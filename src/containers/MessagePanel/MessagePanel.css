@@ -1,4 +1,6 @@
 #message-panel{
+    display: flex;
+    flex-direction: column;
     position: relative;
     width: 750px;
     background-color: rgba(255, 255, 255, 0.808);
@@ -19,5 +21,4 @@
     left:50%;
     width: 100%;
     border-radius: 20px;
-    z-index: 100
 }

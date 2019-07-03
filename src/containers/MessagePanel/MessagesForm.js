@@ -12,7 +12,7 @@ class MessagesForm extends Component{
                     name="message" 
                     label={ <Button icon="add" style={{color:"black"}}/>} 
                     labelPosition="left" 
-
+                    placeholder="Enter the message"
                 />
 
                 <Button.Group icon widths="2" style={{marginTop:"10px"}}>
