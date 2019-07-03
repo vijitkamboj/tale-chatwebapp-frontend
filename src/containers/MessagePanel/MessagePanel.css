@@ -1,8 +1,23 @@
 #message-panel{
+    position: relative;
     width: 750px;
     background-color: rgba(255, 255, 255, 0.808);
     margin:12px;
     margin-left:0;
     border-radius: 0px 10px 10px 0px;
     border-left: 0px;
+    color:rgb(68, 68, 68)
+}
+
+#message-form{
+    position: absolute;
+    background-color: transparent;
+    margin-left: -50%;
+    border:none;
+    box-shadow: none;
+    bottom: 0px;
+    left:50%;
+    width: 100%;
+    border-radius: 20px;
+    z-index: 100
 }
