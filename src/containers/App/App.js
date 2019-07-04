@@ -23,16 +23,18 @@ class App extends Component {
                 <div id="app">
                     <ColorPanel />
                     <SidePanel currentUser={this.props.currentUser}/>
-                    <MessagePanel />  
+                    <MessagePanel currentChannel= {this.props.currentChannel} currentUser={this.props.currentUser} />  
                     <MetaPanel />
                 </div>
             )
        
     } // rendering the chat console component
 }
-const mapStateToProps = ({user}) => {
+
+const mapStateToProps = ({user,channel}) => {
     return({
-        currentUser: user.currentUser
+        currentUser: user.currentUser,
+        currentChannel : channel.currentChannel
     })
 } // providing global state to the component
 

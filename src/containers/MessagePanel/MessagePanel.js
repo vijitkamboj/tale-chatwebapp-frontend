@@ -6,6 +6,11 @@ import {Segment,Comment} from "semantic-ui-react";
 import firebase from "../../firebase"
 
 class MessagePanel extends Component{
+
+    state = {
+        messagesRef :firebase.database().ref("messages")
+    }
+
     render(){
         return(
             <div id="message-panel" className="panels" >
@@ -17,7 +22,13 @@ class MessagePanel extends Component{
                     </Comment.Group>
                 </Segment>
 
-                <MessagesForm />
+                <MessagesForm 
+                    firebase = {firebase} 
+                    messagesRef={this.state.messagesRef} 
+                    currentUser={this.props.currentUser} 
+                    currentChannel = {this.props.currentChannel}
+
+                />
             </div>
         )
     }
