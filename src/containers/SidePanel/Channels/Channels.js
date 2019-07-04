@@ -60,7 +60,7 @@ class Channels extends Component{
                     return(    
                         <li 
                             key={channel.id}
-                            style={{marginTop: "10px",color:this.state.activeChannel === channel ?" rgba(0, 0, 0, 0.7)" : "white" }}
+                            style={{marginTop: "10px",color:this.state.activeChannel === channel ?"white" : " rgba(0, 0, 0, 0.7)" }}
                             className="user-panel-channels-item" 
                             onClick={()=>this.handleChannelClick(channel)}
                         >

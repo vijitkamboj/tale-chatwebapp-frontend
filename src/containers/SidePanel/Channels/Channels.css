@@ -2,8 +2,6 @@
     display: flex;
 
     padding: 30px 0 0 20px;
-
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: normal;
     font-size: 16px;
     color: white
@@ -11,7 +9,6 @@
 
 .user-panel-channels-item:hover {
     cursor: pointer;
-    color: white;
 }
 
 .icon#add:hover {

@@ -7,17 +7,18 @@ class MessagesForm extends Component{
     state={
         message:"",
         isInputEmpty : true,
-        loading: false
+
     }
 
     handleChange = event => {
+        if(event.target.value === ""){
+            this.setState({isInputEmpty:true})
+        }else{
+            this.setState({isInputEmpty:false})
+        }
         this.setState({
             [event.target.name]: event.target.value,
 
-        })
-
-        this.setState({
-            isInputEmpty: this.state.message.length === "" ? true : false,
         })
 
     }
@@ -29,19 +30,15 @@ class MessagesForm extends Component{
             user: {
                 id: this.props.currentUser.uid,
                 name: this.props.currentUser.displayName,
-                avatart: this.props.currentUser.photoURL
+                avatar: this.props.currentUser.photoURL
             }
         }
         return message
     }
 
     sendMessage = () => {
-        const {
-            messagesRef
-        } = this.props
-        this.setState({
-            loading: true
-        });
+        const {messagesRef} = this.props
+        this.setState({isInputEmpty:true});
 
         messagesRef
             .child(this.props.currentChannel.id)
@@ -51,7 +48,6 @@ class MessagesForm extends Component{
             )
             .then(
                 this.setState({
-                    loading: false,
                     isInputEmpty: true,
                     message: ""
                 })
@@ -71,6 +67,7 @@ class MessagesForm extends Component{
                     placeholder="Enter the message"
                     onChange = {this.handleChange}
                     value = {this.state.message}
+                    style={{border: "1px solid rgba(0,0,0,0.2)", borderRadius:"5px"}}
                 />
 
                 <Button.Group icon widths="2" style={{marginTop:"10px"}}>
