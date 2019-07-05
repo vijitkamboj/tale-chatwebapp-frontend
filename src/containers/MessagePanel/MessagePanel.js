@@ -12,11 +12,33 @@ class MessagePanel extends Component{
     state = {
         messagesRef: firebase.database().ref("messages"),
         messages: [],
-        messagesLoading: true
+        messagesLoading:true,
     }
 
     componentWillUnmount(){
         this.state.messagesRef.off("child_added")
+    }
+
+    componentWillUpdate(nextProps,a,b){
+        if(nextProps.currentChannel !== this.props.currentChannel){
+            this.state.messagesRef.off("child_added")
+            this.setState({messages:""})
+        }
+    }
+
+    componentDidUpdate(prevProps,a,b){
+        this.scrollBottom()
+        if(prevProps.currentChannel !== this.props.currentChannel){
+            const {
+                currentChannel,
+                currentUser
+            } = this.props;
+
+            if (currentChannel && currentUser) {
+                this.addListeners(currentChannel.id)
+            }
+            this.setState({messagesLoading:false})
+        }
     }
 
     componentDidMount() {
@@ -26,12 +48,11 @@ class MessagePanel extends Component{
                 currentUser
             } = this.props;
 
-    
             if (currentChannel && currentUser) {
                 this.addListeners(currentChannel.id)
             }
             this.setState({messagesLoading:false})
-        }, 1400)
+        }, 2000)
     }
 
     addListeners = (channelId) => {
@@ -40,7 +61,7 @@ class MessagePanel extends Component{
 
     addMessageListener = (channelId) => {
         let loadedMessages = []
-        
+        let Segment = document.getElementById("message-panel-segment")
         this.state.messagesRef.child(channelId).on("child_added", snap => {
                 loadedMessages.push(snap.val())
                 this.setState({
@@ -77,6 +98,12 @@ class MessagePanel extends Component{
     }
 
     timeFromNow = timestamp => moment(timestamp).fromNow()
+
+    scrollBottom = () => {
+        let Segment = document.getElementById("message-panel-segment")
+        Segment.scrollTop = Segment.scrollHeight;
+
+    }
 
     render(){
         const {messagesRef,messages,messagesLoading} = this.state;
