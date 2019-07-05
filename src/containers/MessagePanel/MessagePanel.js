@@ -7,13 +7,16 @@ import {Segment,Comment} from "semantic-ui-react";
 import firebase from "../../firebase";
 import moment from "moment"
 
-
 class MessagePanel extends Component{
 
     state = {
         messagesRef: firebase.database().ref("messages"),
         messages: [],
         messagesLoading: true
+    }
+
+    componentWillUnmount(){
+        this.state.messagesRef.off("child_added")
     }
 
     componentDidMount() {
@@ -27,7 +30,8 @@ class MessagePanel extends Component{
             if (currentChannel && currentUser) {
                 this.addListeners(currentChannel.id)
             }
-        }, 1500)
+            this.setState({messagesLoading:false})
+        }, 1400)
     }
 
     addListeners = (channelId) => {
@@ -36,13 +40,15 @@ class MessagePanel extends Component{
 
     addMessageListener = (channelId) => {
         let loadedMessages = []
-        this.setState({messagesLoading:false})
+        
         this.state.messagesRef.child(channelId).on("child_added", snap => {
                 loadedMessages.push(snap.val())
                 this.setState({
                     messages: loadedMessages,
                 })
+                Segment.scrollTop = Segment.scrollHeight;
             })
+            
 
     }
 
@@ -51,15 +57,19 @@ class MessagePanel extends Component{
             return(
                 <React.Fragment>
                     {messages.map (message => 
-                        <Comment>
-                        <Comment.Avatar src={message.user.avatar} />
-                        <Comment.Content className={currentUser.uid === message.user.id ? "message__self" : "" }>
-                            <Comment.Author as="a">{message.user.name}</Comment.Author>
-                            <Comment.Metadata>{this.timeFromNow(message.timestamp)}</Comment.Metadata>
-                            <Comment.Text>{message.content}</Comment.Text>
-                        </Comment.Content>
+                        {
+                            return(
+                                <Comment key={message.timestamp} >
+                                    <Comment.Avatar src={message.user.avatar}  />
+                                    <Comment.Content  className={currentUser.uid === message.user.id ? "message_self" : ""}>
+                                        <Comment.Author as="a">{message.user.name}</Comment.Author>
+                                        <Comment.Metadata>{this.timeFromNow(message.timestamp)}</Comment.Metadata>
+                                        <Comment.Text>{message.content}</Comment.Text>
+                                    </Comment.Content>
 
-                        </Comment>
+                                </Comment>
+                            )
+                        }
                     )}
                 </React.Fragment>
             )
@@ -78,8 +88,10 @@ class MessagePanel extends Component{
                 />
 
                 <Segment 
-                loading={messagesLoading}
-                style={{flex:"1", width:"95%" , margin:"10px auto 110px auto" , overflowY:"scroll"}}>
+                    id ="message-panel-segment"
+                    loading={messagesLoading}
+                    style={{flex:"1", width:"95%" , margin:"10px auto 110px auto" , overflowY:"scroll"}}
+                >
                     <Comment.Group>
                         {this.displayMessages(messages,currentUser)}
                     </Comment.Group>

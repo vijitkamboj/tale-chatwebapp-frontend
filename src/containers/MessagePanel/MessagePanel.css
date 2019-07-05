@@ -22,3 +22,10 @@
     width: 100%;
     border-radius: 20px;
 }
+
+.message_self{
+    padding: 3px 0 3px 0;
+    padding-left: 20px;
+    border-left: 2px solid rgba(255,153,153);
+    background-color: rgba(92, 91, 91, 0.089)
+}

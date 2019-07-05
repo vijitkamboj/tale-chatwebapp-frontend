@@ -7,8 +7,11 @@ class MessagesForm extends Component{
     state={
         message:"",
         isInputEmpty : true,
+        Segment :  null
 
     }
+
+
 
     handleChange = event => {
         if(event.target.value === ""){
@@ -39,7 +42,6 @@ class MessagesForm extends Component{
     sendMessage = () => {
         const {messagesRef} = this.props
         this.setState({isInputEmpty:true});
-
         messagesRef
             .child(this.props.currentChannel.id)
             .push()
@@ -52,6 +54,12 @@ class MessagesForm extends Component{
                     message: ""
                 })
             )
+    }
+
+    handleEnter = (event) => {
+        if(event.keyCode === 13 && this.state.isInputEmpty === false){
+            this.sendMessage()
+        }
     }
 
     render(){
@@ -68,6 +76,7 @@ class MessagesForm extends Component{
                     onChange = {this.handleChange}
                     value = {this.state.message}
                     style={{border: "1px solid rgba(0,0,0,0.2)", borderRadius:"5px"}}
+                    onKeyDown = {this.handleEnter}
                 />
 
                 <Button.Group icon widths="2" style={{marginTop:"10px"}}>
