@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 
 import MessagesHeader from "./MessagesHeader";
 import MessagesForm from "./MessagesForm";
-import Message from "./Message"
 import {Segment,Comment} from "semantic-ui-react";
-import firebase from "../../firebase"
+import firebase from "../../firebase";
+import moment from "moment"
 
 
 class MessagePanel extends Component{
@@ -38,7 +38,6 @@ class MessagePanel extends Component{
         let loadedMessages = []
         this.setState({messagesLoading:false})
         this.state.messagesRef.child(channelId).on("child_added", snap => {
-                console.log(1);
                 loadedMessages.push(snap.val())
                 this.setState({
                     messages: loadedMessages,
@@ -47,15 +46,27 @@ class MessagePanel extends Component{
 
     }
 
-    displayMessages = (messages) => {
-        messages.length > 0 && messages.map (message => (
-            <Message 
-                key = {message.timestamp}
-                message = {message}
-                user = {this.props.currentChannel}
-            /> 
-        ))
+    displayMessages = (messages,currentUser) => {
+        if(messages.length>0){
+            return(
+                <React.Fragment>
+                    {messages.map (message => 
+                        <Comment>
+                        <Comment.Avatar src={message.user.avatar} />
+                        <Comment.Content className={currentUser.uid === message.user.id ? "message__self" : "" }>
+                            <Comment.Author as="a">{message.user.name}</Comment.Author>
+                            <Comment.Metadata>{this.timeFromNow(message.timestamp)}</Comment.Metadata>
+                            <Comment.Text>{message.content}</Comment.Text>
+                        </Comment.Content>
+
+                        </Comment>
+                    )}
+                </React.Fragment>
+            )
+        }
     }
+
+    timeFromNow = timestamp => moment(timestamp).fromNow()
 
     render(){
         const {messagesRef,messages,messagesLoading} = this.state;
@@ -70,7 +81,7 @@ class MessagePanel extends Component{
                 loading={messagesLoading}
                 style={{flex:"1", width:"95%" , margin:"10px auto 110px auto" , overflowY:"scroll"}}>
                     <Comment.Group>
-                        {this.displayMessages(messages)}
+                        {this.displayMessages(messages,currentUser)}
                     </Comment.Group>
                 </Segment>
 
