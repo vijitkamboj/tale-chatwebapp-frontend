@@ -21,8 +21,8 @@ class MessagePanel extends Component{
 
     componentWillUpdate(nextProps,a,b){
         if(nextProps.currentChannel !== this.props.currentChannel){
-            this.state.messagesRef.off("child_added")
             this.setState({messages:""})
+            this.state.messagesRef.off("child_added")
         }
     }
 
