@@ -30,9 +30,10 @@ class Channels extends Component{
     addListeners = () => {
         let loadedChannels = [];
         this.state.channelsRef.on("child_added", snap => {
-            loadedChannels.push(snap.val())
-            this.setState({channels:loadedChannels})
-            this.setFirstChannel(this.state.channels)
+            loadedChannels.push(snap.val());
+            loadedChannels.length === 1 && this.props.changeCurrentChannel(loadedChannels[0]);
+            this.setFirstChannel(loadedChannels);
+            this.setState({channels:loadedChannels});
         });
 
     }// whenever a child is added it returns dataSnapshot of all children and also executes first time when child_added event hasn't happened.
@@ -40,8 +41,8 @@ class Channels extends Component{
 
     setFirstChannel = (channels) => {
         if(this.state.firstLoad === true && channels.length>0 ){
-            this.props.changeCurrentChannel(channels[0])
             this.setState({activeChannel : channels[0],firstLoad:false})
+           
         }
     }
 
@@ -56,7 +57,7 @@ class Channels extends Component{
     displayChannels = (channels) => {
         return(
             <React.Fragment>
-                {channels.length>0 && channels.map((channel,i)=> {
+                {channels.length>0 && channels.map((channel)=> {
                     return(    
                         <li 
                             key={channel.id}

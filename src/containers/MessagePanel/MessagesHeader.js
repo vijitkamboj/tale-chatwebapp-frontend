@@ -9,7 +9,7 @@ class MessagesHeader extends Component{
             <Segment clearing style={{width:"95%",margin:"10px auto 0 auto", height:"auto"}} >
 
                 <span style={{fontSize:"20px",marginRight:"8px"}}>
-                    Vijit
+                    {this.props.currentChannel && this.props.currentChannel.name}
                 </span>
 
                 <Icon 
@@ -25,7 +25,7 @@ class MessagesHeader extends Component{
                     style={{float:"right",margin:"auto 0 "}}
                  />
 
-                <div style={{marginTop:"8px"}}> 5 users </div>
+                <div style={{marginTop:"8px"}}> Unknown users </div>
 
             </Segment>
         )
