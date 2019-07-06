@@ -47,7 +47,7 @@ class MessagePanel extends Component{
             this.setState({messagesLoading:false})
         } // if prev channel is different from new channel then adding listener on new channel
         
-    } // executes just before the component has finished update
+    } // executes just after the compopnent has finished update
 
     componentWillUnmount(){
         this.state.messagesRef.off("child_added")
