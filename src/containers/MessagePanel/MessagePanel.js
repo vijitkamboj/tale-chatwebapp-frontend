@@ -38,10 +38,11 @@ class MessagePanel extends Component{
 
     componentDidUpdate(prevProps){
         this.scrollBottom() // scoling to bottum automatically
-        const { currentChannel} = this.props;
+        const { currentChannel,currentUser} = this.props;
         if(prevProps.currentChannel !== currentChannel){
             
-            this.addListeners(currentChannel.id)
+            if (currentChannel && currentUser)
+            {this.addListeners(currentChannel.id)}
             
             this.setState({messagesLoading:false})
         } // if prev channel is different from new channel then adding listener on new channel
