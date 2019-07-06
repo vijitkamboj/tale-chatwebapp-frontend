@@ -13,65 +13,60 @@ class MessagePanel extends Component{
         messagesRef: firebase.database().ref("messages"),
         messages: [],
         messagesLoading:true,
-    }
+    } // initial state - message segment will be loading 
 
-    componentWillUnmount(){
-        this.state.messagesRef.off("child_added")
-    }
+    componentDidMount() {
 
-    componentWillUpdate(nextProps,a,b){
+        setTimeout(() => {
+            const {currentChannel,currentUser} = this.props;
+
+            if (currentChannel && currentUser) {
+                this.addListeners(currentChannel.id)
+            }
+            this.setState({messagesLoading:false})
+        }, 1900)
+
+    } // when component has mounted , adding listeners on channel but after a
+     //delay of 2s so as to wait for (channel component to succefully mount so that firstChannel can be stored on global state)  
+
+    componentWillUpdate(nextProps){
         if(nextProps.currentChannel !== this.props.currentChannel){
             this.setState({messages:""})
             this.state.messagesRef.off("child_added")
         }
-    }
+    } // before component updates if previous channel is not equal to upcoming cahannel then remove previous listeners and clear messages
 
-    componentDidUpdate(prevProps,a,b){
-        this.scrollBottom()
-        if(prevProps.currentChannel !== this.props.currentChannel){
-            const {
-                currentChannel,
-                currentUser
-            } = this.props;
-
-            if (currentChannel && currentUser) {
-                this.addListeners(currentChannel.id)
-            }
+    componentDidUpdate(prevProps){
+        this.scrollBottom() // scoling to bottum automatically
+        const { currentChannel} = this.props;
+        if(prevProps.currentChannel !== currentChannel){
+            
+            this.addListeners(currentChannel.id)
+            
             this.setState({messagesLoading:false})
-        }
-    }
+        } // if prev channel is different from new channel then adding listener on new channel
+        
+    } // executes just before the component has finished update
 
-    componentDidMount() {
-        setTimeout(() => {
-            const {
-                currentChannel,
-                currentUser
-            } = this.props;
-
-            if (currentChannel && currentUser) {
-                this.addListeners(currentChannel.id)
-            }
-            this.setState({messagesLoading:false})
-        }, 2000)
-    }
+    componentWillUnmount(){
+        this.state.messagesRef.off("child_added")
+    } // removing the listeners befire component unmounts
 
     addListeners = (channelId) => {
         this.addMessageListener(channelId)
-    }
+    }// method to add listeners
 
     addMessageListener = (channelId) => {
         let loadedMessages = []
         let Segment = document.getElementById("message-panel-segment")
         this.state.messagesRef.child(channelId).on("child_added", snap => {
-                loadedMessages.push(snap.val())
-                this.setState({
-                    messages: loadedMessages,
-                })
-                Segment.scrollTop = Segment.scrollHeight;
+            loadedMessages.push(snap.val())
+            this.setState({
+                messages: loadedMessages,
             })
-            
-
-    }
+            Segment.scrollTop = Segment.scrollHeight;
+        })
+    }// listener method
 
     displayMessages = (messages,currentUser) => {
         if(messages.length>0){
@@ -95,7 +90,7 @@ class MessagePanel extends Component{
                 </React.Fragment>
             )
         }
-    }
+    } // method to display messages
 
     timeFromNow = timestamp => moment(timestamp).fromNow()
 
@@ -103,7 +98,7 @@ class MessagePanel extends Component{
         let Segment = document.getElementById("message-panel-segment")
         Segment.scrollTop = Segment.scrollHeight;
 
-    }
+    } // method to scroll to bottom
 
     render(){
         const {messagesRef,messages,messagesLoading} = this.state;

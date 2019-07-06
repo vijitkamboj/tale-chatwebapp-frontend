@@ -7,11 +7,7 @@ class MessagesForm extends Component{
     state={
         message:"",
         isInputEmpty : true,
-        Segment :  null
-
     }
-
-
 
     handleChange = event => {
         if(event.target.value === ""){
