@@ -13,7 +13,7 @@ class MessagesForm extends Component{
         modal:false,
         uploadStatus: "",
         uploadTask : null,
-        percentageUploaded :0
+        percentageUploaded :0,
     }
 
     componentDidUpdate = () => {
@@ -161,6 +161,7 @@ class MessagesForm extends Component{
                         labelPosition="right"
                         color="teal"
                         onClick={this.openModal}
+                        disabled={this.state.uploadStatus === "uploading" ? true : false}
                     />
                 </Button.Group>
                 
