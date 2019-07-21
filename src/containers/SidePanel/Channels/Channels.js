@@ -123,10 +123,27 @@ class Channels extends Component{
     } // method used to store channel into the database
 
     handleChange = (event) => {
+        
         this.setState({
             [event.target.name]: event.target.value,
-            isFormEmpty: this.state.channelDetail !== "" && this.state.channelName !== "" ? false : true
         })
+
+        if (this.state.channelDetail === "" || this.state.channelName === ""){
+            this.setState({
+                isFormEmpty : true
+            })
+        }else{
+            this.setState({
+                isFormEmpty : false
+            })
+        }
+
+        if (event.target.value === ""){
+            this.setState({
+                isFormEmpty: true
+            })
+        }
+
     } // method to handle changes in the input field and constantly updating isFormEmpty state
 
     showModal = () => {

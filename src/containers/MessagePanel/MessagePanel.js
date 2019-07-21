@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 import MessagesHeader from "./MessagesHeader";
 import MessagesForm from "./MessagesForm";
-import {Segment,Comment} from "semantic-ui-react";
+import {Segment,Comment, Image} from "semantic-ui-react";
 import firebase from "../../firebase";
 import moment from "moment"
 
@@ -27,7 +27,7 @@ class MessagePanel extends Component{
         }, 1900)
 
     } // when component has mounted , adding listeners on channel but after a
-     //delay of 2s so as to wait for (channel component to succefully mount so that firstChannel can be stored on global state)  
+     //delay of 1.9s so as to wait for (channel component to succefully mount so that firstChannel can be stored on global state)  
 
     componentWillUpdate(nextProps){
         if(nextProps.currentChannel !== this.props.currentChannel){
@@ -37,8 +37,9 @@ class MessagePanel extends Component{
     } // before component updates if previous channel is not equal to upcoming cahannel then remove previous listeners and clear messages
 
     componentDidUpdate(prevProps){
-        this.scrollBottom() // scoling to bottum automatically
+        this.scrollBottom() // scoling to bottom automatically
         const { currentChannel,currentUser} = this.props;
+
         if(prevProps.currentChannel !== currentChannel){
             
             if (currentChannel && currentUser)
@@ -59,15 +60,18 @@ class MessagePanel extends Component{
 
     addMessageListener = (channelId) => {
         let loadedMessages = []
-        let Segment = document.getElementById("message-panel-segment")
         this.state.messagesRef.child(channelId).on("child_added", snap => {
             loadedMessages.push(snap.val())
             this.setState({
-                messages: loadedMessages,
+                messages: loadedMessages
             })
-            Segment.scrollTop = Segment.scrollHeight;
+            this.scrollBottom() // scoling to bottom automatically
         })
-    }// listener method
+    }// Message Listener
+
+    isImage = (message) => {
+        return message.hasOwnProperty('image') && !message.hasOwnProperty('content')
+    } // method to check wheather message is a image or not
 
     displayMessages = (messages,currentUser) => {
         if(messages.length>0){
@@ -81,7 +85,7 @@ class MessagePanel extends Component{
                                     <Comment.Content  className={currentUser.uid === message.user.id ? "message_self" : ""}>
                                         <Comment.Author as="a">{message.user.name}</Comment.Author>
                                         <Comment.Metadata>{this.timeFromNow(message.timestamp)}</Comment.Metadata>
-                                        <Comment.Text>{message.content}</Comment.Text>
+                                        {this.isImage(message) ? <Image src={message.image} className="message-image"/> : <Comment.Text>{message.content}</Comment.Text>}
                                     </Comment.Content>
 
                                 </Comment>
@@ -97,7 +101,9 @@ class MessagePanel extends Component{
 
     scrollBottom = () => {
         let Segment = document.getElementById("message-panel-segment")
-        Segment.scrollTop = Segment.scrollHeight;
+        if(Segment !== null ){
+            Segment.scrollTop = Segment.scrollHeight
+        };
 
     } // method to scroll to bottom
 

@@ -29,3 +29,8 @@
     border-left: 2px solid rgba(255,153,153);
     background-color: rgba(92, 91, 91, 0.089)
 }
+
+.message-image{
+    padding: 1em;
+    max-height: 400px;
+}
