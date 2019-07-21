@@ -16,18 +16,18 @@ class MessagePanel extends Component{
     } // initial state - message segment will be loading 
 
     componentDidMount() {
-
+        this.scrollBottom()
         setTimeout(() => {
             const {currentChannel,currentUser} = this.props;
 
             if (currentChannel && currentUser) {
                 this.addListeners(currentChannel.id)
             }
-            this.setState({messagesLoading:false})
         }, 1900)
 
     } // when component has mounted , adding listeners on channel but after a
      //delay of 1.9s so as to wait for (channel component to succefully mount so that firstChannel can be stored on global state)  
+
 
     componentWillUpdate(nextProps){
         if(nextProps.currentChannel !== this.props.currentChannel){
@@ -36,42 +36,55 @@ class MessagePanel extends Component{
         }
     } // before component updates if previous channel is not equal to upcoming cahannel then remove previous listeners and clear messages
 
-    componentDidUpdate(prevProps){
-        this.scrollBottom() // scoling to bottom automatically
-        const { currentChannel,currentUser} = this.props;
 
-        if(prevProps.currentChannel !== currentChannel){
-            
-            if (currentChannel && currentUser)
-            {this.addListeners(currentChannel.id)}
-            
-            this.setState({messagesLoading:false})
+    componentDidUpdate(prevProps) {
+        this.scrollBottom()
+        const {
+            currentChannel,
+            currentUser
+        } = this.props;
+
+        if (prevProps.currentChannel !== currentChannel) {
+
+            if (currentChannel && currentUser) {
+                this.addListeners(currentChannel.id)
+            }
+
+            this.setState({
+                messagesLoading: false
+            })
         } // if prev channel is different from new channel then adding listener on new channel
-        
+
     } // executes just after the compopnent has finished update
+
 
     componentWillUnmount(){
         this.state.messagesRef.off("child_added")
     } // removing the listeners befire component unmounts
 
+
     addListeners = (channelId) => {
         this.addMessageListener(channelId)
     }// method to add listeners
+
 
     addMessageListener = (channelId) => {
         let loadedMessages = []
         this.state.messagesRef.child(channelId).on("child_added", snap => {
             loadedMessages.push(snap.val())
             this.setState({
-                messages: loadedMessages
+                messages: loadedMessages,
+                messagesLoading: false
             })
-            this.scrollBottom() // scoling to bottom automatically
+            
         })
     }// Message Listener
+
 
     isImage = (message) => {
         return message.hasOwnProperty('image') && !message.hasOwnProperty('content')
     } // method to check wheather message is a image or not
+
 
     displayMessages = (messages,currentUser) => {
         if(messages.length>0){
@@ -97,7 +110,9 @@ class MessagePanel extends Component{
         }
     } // method to display messages
 
+
     timeFromNow = timestamp => moment(timestamp).fromNow()
+
 
     scrollBottom = () => {
         let Segment = document.getElementById("message-panel-segment")
@@ -106,6 +121,7 @@ class MessagePanel extends Component{
         };
 
     } // method to scroll to bottom
+    
 
     render(){
         const {messagesRef,messages,messagesLoading} = this.state;
@@ -117,9 +133,9 @@ class MessagePanel extends Component{
                 />
 
                 <Segment 
-                    id ="message-panel-segment"
+                    id = "message-panel-segment"
                     loading={messagesLoading}
-                    style={{flex:"1", width:"95%" , margin:"10px auto 110px auto" , overflowY:"scroll"}}
+                    style={{flex:"1", width:"95%" , margin:"10px auto 0px auto" , overflowY:"scroll"}}
                 >
                     <Comment.Group>
                         {this.displayMessages(messages,currentUser)}

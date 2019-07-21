@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {Segment,Button,Input} from "semantic-ui-react"
 import firebase from "../../firebase"
 import uuidv4 from "uuid/v4"
-import FileModal from "./FileModal"
+import FileModal from "./FileModal";
+import ProgressBar from "./ProgressBar"
 
 class MessagesForm extends Component{
 
@@ -15,6 +16,10 @@ class MessagesForm extends Component{
         percentageUploaded :0
     }
 
+    componentDidUpdate = () => {
+        
+    }
+
     handleChange = event => {
         if(event.target.value === ""){
             this.setState({isInputEmpty:true})
@@ -23,6 +28,7 @@ class MessagesForm extends Component{
         }
         this.setState({
             [event.target.name]: event.target.value,
+            uploadStatus: ""
 
         })
 
@@ -67,12 +73,9 @@ class MessagesForm extends Component{
         .push()
             .set(this.createMessage(fileUrl))
             .then(this.setState({
-                uploadStatus: 'done',
+                uploadStatus: '',
                 uploadTask: null
             }))
-            .catch(
-                console.log
-            )
     }
 
     uploadFile = (file, metaData) => {
@@ -98,16 +101,13 @@ class MessagesForm extends Component{
                             uploadTask: null
                         })
                     },
-                    ()=> {
+                    () => {
                         this.state.uploadTask.snapshot.ref.getDownloadURL()
-                        .then(
-                            downloadUrl => {
-                                this.sendFileMessage(downloadUrl, ref, pathToUpload);
-                            }
-                        )
-                        .catch(
-                            console.log
-                        )
+                            .then(
+                                downloadUrl => {
+                                    this.sendFileMessage(downloadUrl, ref, pathToUpload);
+                                }
+                            )
                     }
                 )
             }
@@ -132,6 +132,7 @@ class MessagesForm extends Component{
         return(
             <Segment 
                 id="message-form"
+                style = {{padding:"10px", marginTop:"0px"}}
             >
                 <Input 
                     fluid 
@@ -168,7 +169,10 @@ class MessagesForm extends Component{
                     closeModal = {this.closeModal}
                     uploadFile = {this.uploadFile}
                 />
-
+                <ProgressBar 
+                    percentageUploaded = {this.state.percentageUploaded}
+                    uploadStatus = {this.state.uploadStatus}
+                />
 
             </Segment>
         )
