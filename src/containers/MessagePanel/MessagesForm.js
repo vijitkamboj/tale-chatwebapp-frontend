@@ -11,7 +11,8 @@ class MessagesForm extends Component{
         message:"",
         isInputEmpty : true,
         modal:false,
-        uploadStatus: "",
+        uploadStatus: ,
+        
         uploadTask : null,
         percentageUploaded :0,
     }
