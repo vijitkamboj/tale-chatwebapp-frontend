@@ -16,6 +16,8 @@ class App extends Component {
         }
     } // before the component is mounted , making sure that there is signedIn user , if not refresh the page so that it redirects to home
 
+    // testing
+
     
     render(){
         document.body.className = "app-body"
