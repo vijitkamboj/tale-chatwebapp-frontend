@@ -10,7 +10,7 @@ export const setUser = (user,status) => {
     })
 }// used to change the current user state
 
-export const clearUser = () => {
+export const clearUser = () => {                           
     return({
         type: actionTypes.CLEAR_USER,
         payload: {
